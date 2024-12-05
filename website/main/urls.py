@@ -25,9 +25,8 @@ path('suggest_page/', views.suggest_page, name="suggest_page"),
     path('registration/bicycle/', views.car_reg, name='bicycle_registration'),
     path('help', views.help, name='help'),
     path('book-vehicle/', views.book_vehicle, name='book_vehicle'),
-    path('booking-success/', views.booking_success, name='booking_success'),
-    path('api/get-vehicles/', views.get_vehicles, name='get_vehicles')
+    path('booking-success/', views.booking_success, name='booking_success')
     
 ]
  # cd website
-# python manage.py runserver
+  # python manage.py runserver

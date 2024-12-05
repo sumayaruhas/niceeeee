@@ -43,10 +43,8 @@ class HelpRequestForm(forms.ModelForm):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['pickup_location', 'dropoff_location', 'date', 'time', 'vehicle']
+        fields = ['pickup_location', 'dropoff_location', 'date', 'time']
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date'}),
             'time': forms.TimeInput(attrs={'type': 'time'}),
         }
-
-    vehicle = forms.ModelChoiceField(queryset=VehicleMedium.objects.all(), empty_label="-- Select Vehicle --", required=True)
