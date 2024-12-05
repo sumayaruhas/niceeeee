@@ -8,6 +8,7 @@ from .models import HelpRequest
 from .forms import BookingForm
 from .models import VehicleMedium, Vehicle
 from django.contrib import messages
+from django.http import JsonResponse
 
 def help_request_view(request):
     if request.method == 'POST':
@@ -109,6 +110,21 @@ def logout_view(request):
     return redirect('home')
 
 @login_required
+def get_vehicles(request):
+    if request.method == 'GET':
+        vehicles = Vehicle.objects.all()
+        vehicles_data = [
+            {
+                "id": vehicle.id,
+                "name": vehicle.name,
+                "license_plate": vehicle.license_plate,
+                "medium": vehicle.medium.name
+            }
+            for vehicle in vehicles
+        ]
+        return JsonResponse(vehicles_data, safe=False)
+    
+@login_required
 def book_vehicle(request):
     mediums = VehicleMedium.objects.all()
     vehicles = Vehicle.objects.all()
@@ -118,8 +134,6 @@ def book_vehicle(request):
         if form.is_valid():
             booking = form.save(commit=False)
             booking.user = request.user
-            vehicle_id = request.POST.get('vehicle_id')
-            booking.vehicle = Vehicle.objects.get(id=vehicle_id)
             booking.save()
             return redirect('booking_success')
     else:
@@ -130,6 +144,5 @@ def book_vehicle(request):
         'mediums': mediums,
         'vehicles': vehicles
     })
-
 def booking_success(request):
     return render(request, 'booking_success.html')
