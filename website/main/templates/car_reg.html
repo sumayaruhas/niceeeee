@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <div class="title" style="background-color: white;padding: 20px 0 30px 0;">
+    <h1>Earn with Your Car, Bike or Bicycle</h1>
+    <p>Do One or Multiple Services with your vehicle </p>
+  </div>
+  <div style="background-color: #faf0e8;display: flex;flex-direction: column; align-items: center;">
+    <div class="reg_section">
+      <div class="vehi_info">
+        <div class="type_vehi">
+          <a href="{% url 'car_registration' %}" class="thakna" style="color: black;"><div id="car_reg_icon" style="background-color: white;"><i class="fa-solid fa-car" style="color: #0074f8;"></i>
+            <p>Car</p>
+          </div></a>
+          <a href="{% url 'bike_registration' %}" class="thakna" style="color: black;"><div id="bike_reg_icon"><i class="fa-solid fa-motorcycle fa-fw"></i>
+            <p>Bike</p>
+          </div></a>
+          <a href="{% url 'bicycle_registration' %}" class="thakna" style="color: black;"><div id="bicycle_reg_icon"><i class="fa-solid fa-bicycle"></i>
+            <p>Bicycle</p>
+          </div></a>
+        </div>
+        <div class="real-info">
+          <p style="font-size: 30px;font-weight: 900;">REGISTER NOW</p>
+          <div class="urname">
+            <div id="fname">
+              <p>First Name</p>
+              <input placeholder="Enter your first name">
+            </div>
+            <div id="lname">
+              <p>Last Name</p>
+              <input placeholder="Enter your last name">
+            </div>
+          </div>
+          <div id="pnumber">
+            <p>Enter your number</p>
+            <input placeholder="01XXXXXXXXX">
+          </div>
+          <div class="loca">
+            <div id="country">
+              <p>Country</p>
+              <select>
+                <option>--Select Country--</option>
+                <option>Bangladesh</option>
+              </select>
+            </div>
+            <div id="city">
+              <p>City</p>
+              <select>
+                <option>--Select City--</option>
+                <option>Dhaka</option>
+                <option>Chattogram</option>
+                <option>Khulna</option>
+                <option>Rajshahi</option>
+                <option>Barisal</option>
+              </select>
+            </div>
+          </div>
+          <div class="which_serv">
+            <p>Service(s) you want to provide</p>
+            <div class="checkbox-container">
+              <input type="checkbox" id="fruit1" name="fruits" value="apple">
+              <span class="custom-checkbox"></span>
+              <label for="fruit1">Transporation</label>
+            </div>
+          </div>
+          <div class="min_earn">
+            <p>You can earn up to</p>
+            <p style="color: rgb(0, 47, 255);font-weight: 550;">৳60000</p>
+          </div>
+          <div class="nxt_info">
+            <p>Next Step</p><i class="fa-solid fa-right-long"></i>
+          </div>
+        </div>
+      </div>
+      <div class="fea-rule">
+        <div class="scroll">
+          <div class="why">
+            <h1 style="font-size: 40px;">Got a Car?</h1>
+            <p>These are the services you can be a part of!</p>
+          </div>
+          <div class="type_ser ser">
+            <img src="{% static 'website/images/icon-car.png' %}" style="height: 50px;">
+            <p class="ser_t">Transporation</p>
+          </div>
+          <div class="divider"></div>
+          <div class="why">
+            <h1>Why Join the SumTransit Family?</h1>
+            <p>Being wite SumTransit means being on the highest earning platform! So, what are you waiting for? Join us to
+              earn
+              the most!</p>
+          </div>
+          <div class="benefit" style="padding-left: 8px;padding-top: 60px;">
+            <img src="{% static 'website/images/icon-insured.png' %}" style="object-fit: contain;">
+            <div>
+              <h3>Your Ride is Insured</h3>
+              <p>SumTransit cares about your safety. And to keep you safe, SumTransit is giving you insurance coverage.
+              </p>
+            </div>
+          </div>
+          <div class="benefit">
+            <img src="{% static 'website/images/icon-bonus.png' %}" style="object-fit: contain;">
+            <div>
+              <h3>Earn More with Bonus</h3>
+              <p>With SumTransit's daily quests and attractive special offers, you can extra regularly.</p>
+            </div>
+          </div>
+          <div class="benefit" style="padding-left: 12px;">
+            <img src="{% static 'website/images/icon-time.png' %}" style="object-fit: contain;">
+            <div>
+              <h3>Get Your Payment on Time</h3>
+              <p>We SumTransit , you will never face a delay in payment. Get your payment in the shortest time!</p>
+            </div>
+          </div>
+          <div class="why" style="padding-top: 100px;">
+            <h1>Know if You’re Eligible to Join Us</h1>
+            <p>Not sure if you’re eligible to be a Captain? If you have the following, you can join us!</p>
+          </div>
+          <li>
+            <span class="num_i">
+              1
+            </span>
+            <div class="requ">
+              <h3>You must have an Android Phone</h3>
+              <p>With a smartphone, you can easily download and work with the SumTransit Drive app.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num_i">
+              2
+            </span>
+            <div class="requ">
+              <h3>You must have your car’s registration paper</h3>
+              <p>You must have your car’s registration paper in order to become a part oe SumTransit.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num_i">
+              3
+            </span>
+            <div class="requ">
+              <h3>You must have driving license</h3>
+              <p>To be a captain oe SumTransit, you must have a valid driver’s license.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num_i">
+              4
+            </span>
+            <div class="requ">
+              <h3>You must have your car’s updated fitness paper</h3>
+              <p>To register your car wite SumTransit, you must have updated fitness paper for your car.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num_i">
+              5
+            </span>
+            <div class="requ">
+              <h3>National ID/Passport</h3>
+              <p>In order to register as a rider, you either have an updated national ID or passport.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num_i">
+              6
+            </span>
+            <div class="requ">
+              <h3>Tax Token</h3>
+              <p>To register wite SumTransit you must present your tax token.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num_i">
+              7
+            </span>
+            <div class="requ">
+              <h3>Safety Coverage</h3>
+              <p>You should have the insurance papers with you at the time of registering wite SumTransit.</p>
+            </div>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

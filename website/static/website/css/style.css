@@ -1,0 +1,1191 @@
+* {
+    margin: 0px;
+    border: border-box;
+    padding: 0px;
+    font-family: Roboto;
+}
+
+.banner-container {
+    position: relative;
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+    height: auto;
+}
+.banner-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.lang{
+    display: flex;
+    flex-wrap: wrap;
+}
+.lang p{
+    margin: 0 10px 0 10px
+}
+.lang select{
+    background-color:black; 
+    color: #fff;
+    border-color: transparent;
+}
+.Navbar, .sub_nav {
+    padding: 20px 0 20px 0;
+}
+
+.sub_nav:hover{
+    background-color:rgb(114, 114, 114);
+    padding: 10px 20px 10px 20px;
+    border-radius: 8px;
+}
+
+.Navbar{
+    display: flex; 
+    align-items: center; 
+    background-color:black; 
+    color:rgb(255, 255, 255);
+    justify-content: space-between;
+}
+.heropart {
+    background-image: url("/static/website/images/banner.jpeg");
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 500px;
+    width: auto;
+    background-size: cover;
+    background-position: bottom;
+    border: 100px black;
+    
+}
+
+.sub_nav , .Navbar-2 div{
+    display: flex;
+    padding: 20px;
+}
+
+.sub_nav p{
+    margin-left: 5px;
+}
+
+.banner-text {
+    position: relative;
+    right: 28%;
+    top: 20%;
+    width: 400px;
+    font-weight: 900;
+    height: auto;
+
+}
+.banner-text p{
+    background-color: rgba(255, 255, 255, 0.5) ;
+    color: rgb(66, 66, 66);
+    display: flexbox;
+    font-size: 330%;
+}
+.login-box form input[type="text"],
+.login-box form input[type="email"],
+.login-box form input[type="password"] {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0 15px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    
+}
+.Wanna_ride {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly ;
+}
+
+.map {
+    margin: 50px;
+}
+
+.which_icon {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    justify-content: space-between;
+    padding: 20px 20px 20px 0;
+    text-align: center;
+}
+
+#ride_icon i,
+#fly_icon i,
+#parcel_icon i {
+    padding: 50px 10px 50px 10px;
+    display: block;
+    justify-content: center;
+    padding: 15px;
+    border: 3px;
+    border-radius: 25%;
+    margin-bottom: 10px;
+}
+
+#ride_icon i {
+    background-color: rgb(98, 146, 250);
+}
+
+#fly_icon i,
+#parcel_icon i {
+    color: #525252;
+}
+
+#ride_icon,
+#fly_icon:hover,
+#parcel_icon:hover 
+{
+    cursor: pointer;
+}
+
+#fly_icon:hover i,
+#parcel_icon:hover i {
+    color: #222;
+}
+
+.from,
+.to {
+    height: 50px;
+    border-top-left-radius: 9%;
+    border-radius: 5%;
+    background-color: #E6E6E6;
+    border-color: rgb(85, 119, 190);
+    padding-left: 5px;
+    margin-bottom: 30px;
+}
+
+.from {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.from>input {
+    width: 90%;
+    height: 95%;
+    background-color: #E6E6E6;
+    border: transparent;
+}
+
+.to>input {
+    width: 95%;
+    height: 95%;
+    background-color: #E6E6E6;
+    border: transparent;
+    text-align: right;
+}
+
+.from>i {
+    position: relative;
+    right: 0%;
+}
+.from:hover i{
+    color: #e91e63;
+    transition: 0.5s ease;
+}
+
+.check_but {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.check_but>button {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px;
+    margin-right: 20px;
+    border-radius: 10%;
+    background-color: rgb(107, 153, 252);
+}
+.check_but:hover button{
+    background-color: rgb(16, 90, 250);
+    color:#fff ;
+    transition: 0.5s ease;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(221, 200, 200);
+    border-radius: 10px;
+    max-width: 900px;
+    box-shadow: 0px 4px 10px rgb(166, 175, 179);
+    margin: 50px auto;
+}
+
+.info-box {
+    text-align: center;
+    padding: 20px;
+    flex: 2;
+    border-right: 1px solid black;
+}
+
+.info-box:last-child {
+    border-right: none;
+}
+i1 {
+    font-size: 36px;
+    color: rgb(56, 37, 37);
+    margin-bottom: 10px;
+    display: block;
+
+}
+
+i2 {
+    font-size: 16px;
+    color: rgb(209, 108, 108);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.footer {
+    background-color: #24262b;
+    padding: 70px 0;
+}
+
+.container {
+    max-width: 1240px;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap:inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer-col {
+    width: 25%;
+    padding: 0 15px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 4px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+.footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+@media(max-width: 767px) {
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width: 574px) {
+    .footer-col {
+        width: 100%;
+    }
+}
+
+.title h1 {
+    font-size: 50px;
+    color: #24262b;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.title p {
+
+    font-size: 20px;
+    color: #8c8c8c;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.services-section {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 75px auto;
+    text-align: center;
+}
+
+.card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 20px;
+    padding: 20px 10px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+
+.card:hover {
+    background-color: rgb(233, 199, 154);
+    transition: 0.5s ease;
+}
+
+.card .icon {
+    font-size: 45px;
+    margin-bottom: 25px;
+    color: #009dff;
+}
+
+.card h2 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.card p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    color: #8c8c8c;
+}
+
+.button_service {
+    font-size: 17px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #c78585;
+    padding: 11px 15px;
+    border-radius: 5px;
+    margin-bottom: 6px;
+}
+
+.button_service:hover {
+    background-color: #7cbfcc;
+    transition: 0.5s ease;
+}
+
+@media screen and (max-width:940px) {
+    .services-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card {
+        width: 85%;
+        display: flex;
+        margin: 20px 0px;
+    }
+}
+@media screen and (max-width:1192px) {
+    .Wanna_ride {
+        display: flex;
+        flex-direction: column;
+    }
+    .map{
+        width: 80%;
+        align-self: center;
+    }
+    .which{
+        width: 70%;
+    }
+}
+.basic_nav div {
+    padding:10px;
+}
+.sign_up_nav{
+    margin:0 20px 0 10px;
+    background-color: #fff;
+    color: #222;
+    border-radius: 30px;
+}
+.lang:hover,.log_in_nav:hover, .lang:hover select{
+    background-color: #3f3e3e;
+    transform: 0.5s ease;
+    border-radius: 30px;
+}
+.lang,.log_in_nav,.sign_up_nav,.sumtran,.Navbar-2 div,.Navbar-2 i:hover{
+    cursor: pointer;
+}
+.review {
+    display: flex;
+    justify-content: center; /* Centers the content */
+    flex-wrap: wrap; /* Allows wrapping to the next line */
+    gap: 40px; /* Space between review boxes */
+    margin-bottom: 50px; /* Space below each row of reviews */
+}
+
+.review-box1,.review-box2 {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    width: 17%; 
+    box-shadow: 0px 4px 10px rgb(166, 175, 179);
+    flex-direction: row;
+    height: fit-content;
+}
+.review-box2{
+    position: relative;
+    top: 30px;
+}
+
+.profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.review-box1 {
+    background-color: rgb(238, 221, 255); 
+}
+
+.review-box2 {
+    background-color: rgb(212, 255, 241);
+}
+.title1 h1 {
+    font-size: 50px;
+    color: #24262b;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 3px;
+
+}
+
+.title1 p {
+    font-size: 20px;
+    color: #8c8c8c;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.type_vehi i{
+    font-size: 60px;
+    color: #89ddee;
+    padding-bottom: 20px;
+}
+.type_vehi {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.reg_section{
+    display: flex;
+    background-color: #faf0e8;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 40px;
+    width: 1100px;
+}
+.type_vehi div{
+    height: 150px;
+    width: 170px;
+}
+#bike_reg_icon:hover,#bicycle_reg_icon:hover ,#car_reg_icon:hover{
+    background-color: #fff;
+    border-radius: 10px;
+}
+#bike_reg_icon:hover i,#bicycle_reg_icon:hover i,#car_reg_icon:hover i{
+    color: #0074f8;
+}
+#car_reg_icon,#bike_reg_icon,#bicycle_reg_icon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1px 3px 1px;
+    border-radius: 10px;
+}
+#car_reg_icon p,#bike_reg_icon p,#bicycle_reg_icon p{
+    font-size: 20px;
+}
+.loca,.urname{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.vehi_info{
+    width: 50%;
+    padding: 3px 40px;
+    position:sticky;
+    height: fit-content;
+}
+.real-info input,.real-info select{
+    height: 40px;
+    width:200px;
+    padding-left: 5px;
+    border: #f0dbca solid 2px;
+    border-radius: 5px;
+
+}
+.real-info {
+    background-color: #fff;
+    padding: 15px;
+    width:487px;
+}
+.real-info p{
+    font-size: 18px;
+    padding: 20px 0 10px 0;
+
+}
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-right: 60px;
+
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #4CAF50;
+    transform: translate(-50%, -50%);
+    opacity: 0; 
+    transition: opacity 0.2s ease;
+}
+
+input[type="checkbox"]:checked + .custom-checkbox::after {
+    opacity: 1;
+}
+
+.checkbox-container{
+    cursor: pointer;
+    font-size: 16px;
+}
+.min_earn{
+    display: flex;
+    justify-content: space-between;
+    background-color:  #faf0e8;
+    padding: 0 20px;
+    margin-top: 40px;
+}
+.min_earn p{
+    font-size: 15px;
+    font-weight: 520;
+}
+.nxt_info{
+    background-color: #3467d4;
+    color: white;
+    font-weight: 600;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 25px 15px 15px;
+    width: max-content;
+    border-radius: 5px;
+    position: relative;
+    left: 300px;
+}
+.nxt_info p{
+    font-size: 15px;
+    padding: 0 10px 0 0;
+}
+.nxt_info:hover{
+    background-color: #0051ff;
+}
+.nxt_info:hover i{
+    transform: translateX(15px);
+    transition: 0.5s ease-in;
+}
+.nxt_info i{
+    transition: 0.5s ease-out;
+}
+.fea-rule{
+    width: 7500px;
+    margin-bottom: 150px;
+    height: auto;
+}
+.basic_nav div {
+    padding:10px;
+}
+.sign_up_nav{
+    margin:0 20px 0 10px;
+    background-color: #fff;
+    color: #222;
+    border-radius: 30px;
+}
+.lang:hover,.log_in_nav:hover, .lang:hover select{
+    background-color: #3f3e3e;
+    transform: 0.5s ease;
+    border-radius: 30px;
+}
+.lang,.log_in_nav,.sign_up_nav,.sumtran,.Navbar-2 p,.Navbar-2 i:hover{
+    cursor: pointer;
+}
+.review {
+    display: flex;
+    justify-content: center; /* Centers the content */
+    flex-wrap: wrap; /* Allows wrapping to the next line */
+    gap: 40px; /* Space between review boxes */
+    margin-bottom: 50px; /* Space below each row of reviews */
+}
+
+.review-box1,.review-box2 {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+    width: 17%; /* Adjusted width for a better look */
+    box-shadow: 0px 4px 10px rgb(166, 175, 179);
+    flex-direction: row; /* Aligns image and text horizontally */
+    height: fit-content;
+}
+.review-box2{
+    position: relative;
+    top: 30px;
+}
+
+.profile-picture {
+    width: 60px; /* Larger size for better visibility */
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 5px; /* Add some space between the name and paragraph */
+}
+
+p {
+    font-size: 14px;
+    margin: 0; /* Remove default margin */
+}
+
+.review-box1 {
+    background-color: rgb(238, 221, 255); 
+}
+
+.review-box2 {
+    background-color: rgb(212, 255, 241);
+}
+.title1 h1 {
+    font-size: 50px;
+    color: #24262b;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 3px;
+
+}
+
+.title1 p {
+    font-size: 20px;
+    color: #8c8c8c;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+
+.containersu {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+.justtoalign{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.logo h1 {
+    font-size: 24px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.login-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+form input[type="text"] {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    margin-right:10px;
+    border: 2px solid #000000;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.google-btn {
+    background-color: white;
+    color: #757575;
+    border: 1px solid #757575;
+}
+
+.apple-btn {
+    background-color: white;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.qr-btn {
+    background-color: white;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.divider {
+    position: relative;
+    margin: 20px 0;
+}
+
+.divider span {
+    background: #fff;
+    padding: 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #ddd;
+    z-index: 0;
+}
+
+.terms {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.container2 {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    width: 100%;
+    max-width: 1240px;
+    margin:auto;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    font-size: 60px;
+    font-weight: bolder;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 140px;
+    margin-bottom: 30px;
+
+}
+
+.option {
+    text-align: center;
+    width: 45%;
+    transition: all 0.3s ease;
+}
+
+.option a {
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+
+}
+.option a:hover {
+    color: #5f5252;
+    padding-left: 20px;
+
+}
+.option .arrow {
+    font-size: 40px;
+    font-weight: bold;    
+    padding-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.option .arrow:hover {
+    padding-left: 20px;
+}
+
+.underline {
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    margin-top: 10px;
+}
+.thakna{
+    text-decoration: none;
+    color: aliceblue;
+}
+.type_ser{
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+}
+.ser_t{
+    padding-left: 15px;
+    font-size: 18px;
+}
+.ser_i{
+    height: 100px;
+}
+.why{
+    padding-top: 20px;
+}
+.why h1{
+    font-size: 35px;
+}
+.why p{
+    font-size: 20px;
+    padding-top: 15px;
+    color: #8b8989;
+}
+.benefit{
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0;
+}
+.benefit div{
+    padding-left: 20px;
+}
+
+
+.form-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+.registration-form h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.registration-form p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 10px;
+    width:600px;
+    margin-bottom:20px;
+}
+
+.form-group:last-child {
+    margin-right: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    font-weight:bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.name-inputs {
+
+    display: flex;
+    gap: 10px;
+}
+
+.name-inputs input {
+    flex: 1;
+}
+
+.form-group small {
+    
+    font-size: 12px;
+    color: #999;
+}
+
+.submit-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        margin-right: 0;
+    }
+}
+
+.hide{
+    display: none;
+}
+.Tracking input,.arrive select,.depart select{
+    height: 50px;
+    border-top-left-radius: 9%;
+    border-radius: 5%;
+    background-color: #E6E6E6;
+    padding-left: 5px;
+    margin-bottom: 30px;
+    padding-left:10px ;
+    border: none;
+    width: 100%;
+}
+.arrive i,.depart i{
+    font-size: 35px;
+    padding-right: 20px;
+}
+
+.num_i{
+    padding: 10px;
+    color: white;
+    background-color: rgb(25, 25, 194);
+    border-radius: 25px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+.fea-rule li{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-top: 35px;
+}
+.benefit p,.requ p{
+    font-size: 17px;
+    color: #3f3e3e;
+    padding-top: 10px;
+}
+.requ{
+    flex-wrap: wrap;
+    display: flex;
+    width: 80%;
+}
+
+.serv{
+    display: flex;
+    flex-wrap: wrap;
+}
+.ser{
+    padding: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.type_ser{
+    margin-right: 50px;
+    margin-bottom: 20px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#headerContainerhelp {
+    background-color: #3280f7;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+#mainContainerhelp {
+    margin: 20px auto;
+    max-width: 800px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.formSectionhelp {
+    margin-bottom: 20px;
+}
+
+.formLabelhelp {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.inputFieldhelp,
+.textareaFieldhelp,
+.submitButtonhelp {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.textareaFieldhelp {
+    height: 100px;
+    resize: none;
+}
+
+.submitButtonhelp {
+    background-color: #3280f7;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submitButtonhelp:hover {
+    background-color: #3280f7;
+}
+
+#footerContainerhelp {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    margin-top: 20px;
+} 

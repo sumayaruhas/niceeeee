@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="Wanna_ride">
+    <div class="which" style="padding: 50px;">
+        <div class="ride_text" style="font-size: 300%; width: 500px;">
+            Go anywhere with SumTransit </div>
+        <div class="which_icon">
+            <div id="ride_icon"><i class="fa-solid fa-road l_icon" style="font-size: 20px;"></i>
+                <p style="font-size: 15px;">Ride</p>
+            </div>
+            <div id="parcel_icon"><i class="fa-solid fa-box l_icon" style="font-size: 20px;"></i>
+                <p style="font-size: 15px;">Parcel
+            </div>
+            <div id="fly_icon"><i class="fa-solid fa-plane l_icon" style="font-size: 20px;"></i>
+                <p style="font-size: 15px;">Fly</p>
+            </div>
+        </div>
+        <div class="loc">
+            <div class="from"><input placeholder="Pickup Location">
+                <i class="fa-solid fa-location-dot" style="font-size: 25px;"></i>
+            </div>
+            <div class="to"> <input placeholder="Dropoff Location"></div>
+        </div>
+        <div class="parcel hide">
+            <div class="Tracking"> <input placeholder="Enter Tracking ID"></div>
+        </div>
+        <div class="fly hide">
+            <div class="depart">
+                <i class="fa-solid fa-plane-departure"></i>
+                <select style="width: 70%;margin-bottom: 10px">
+                    <option>--Departing Country--</option>
+                    <option>Bangladesh</option>
+                </select>
+                <select>
+                    <option>--Departing Airport--</option>
+                    <option>Dhaka,Hazrat Shahjalal International Airport</option>
+                    <option>Chattogram, Shah Amanat International Airport</option>
+                    <option>Barisal, Barishal Airport</option>
+                    <option>Jashore, Jashore Airport</option>
+                    <option>Cox's Bazar, Cox's Bazar Airport</option>
+                </select>
+            </div>
+            <div class="arrive"><i class="fa-solid fa-plane-arrival"></i>
+                <select style="width: 70%;margin-bottom: 10px;">
+                    <option>--Arriving Country--</option>
+                    <option>Bangladesh</option>
+                </select>
+                <select>
+                    <option>--Arriving Airport--</option>
+                    <option>Dhaka,Hazrat Shahjalal International Airport</option>
+                    <option>Chattogram, Shah Amanat International Airport</option>
+                    <option>Barisal, Barishal Airport</option>
+                    <option>Jashore, Jashore Airport</option>
+                    <option>Cox's Bazar, Cox's Bazar Airport</option>
+                </select>
+            </div>
+        </div>
+        <div class="check_but"><button>Check</button></div>
+    </div>
+    <iframe class="map" width="40%" height="450px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=88.0119,20.5635,92.6739,26.6387&layer=mapnik"
+        style="border: 1px solid black;"></iframe>
+</div>
+{% endblock %}

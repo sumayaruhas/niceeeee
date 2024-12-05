@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="heropart">
+  <div class="banner-text">
+    <p>World's</p>
+    <p>#1 Platform</p>
+    <p>For All Services</p>
+    <p style="font-size: 150%;">One Website, all services at your fingertips</p>
+  </div>
+</div>
+<div>
+  <div class="info">
+    <div class="info-box">
+      <i1>6100+</i1>
+      <i2>Employee</i2>
+    </div>
+    <div class="info-box">
+      <i1>10+</i1>
+      <i2>Country Worldwide</i2>
+    </div>
+    <div class="info-box">
+      <i1>12020+</i1>
+      <i2>Customers</i2>
+    </div>
+    <div class="info-box">
+      <i1>60600+</i1>
+      <i2>Services Served</i2>
+    </div>
+  </div>
+
+</div>
+<div class="Wanna_ride">
+  <div class="which" style="padding: 50px;">
+    <div class="ride_text" style="font-size: 300%; width: 500px;">
+      Go anywhere with SumTransit </div>
+    <div class="which_icon">
+      <div id="ride_icon"><i class="fa-solid fa-road l_icon" style="font-size: 20px;"></i>
+        <p style="font-size: 15px;">Ride</p>
+      </div>
+      <div id="parcel_icon"><i class="fa-solid fa-box l_icon" style="font-size: 20px;"></i>
+        <p style="font-size: 15px;">Parcel
+      </div>
+      <div id="fly_icon"><i class="fa-solid fa-plane l_icon" style="font-size: 20px;"></i>
+        <p style="font-size: 15px;">Fly</p>
+      </div>
+    </div>
+    <div class="loc">
+      <div class="from"><input placeholder="Pickup Location">
+        <i class="fa-solid fa-location-dot" style="font-size: 25px;"></i>
+      </div>
+      <div class="to"> <input placeholder="Dropoff Location"></div>
+    </div>
+    <div class="parcel hide">
+      <div class="Tracking"> <input placeholder="Enter Tracking ID"></div>
+    </div>
+    <div class="fly hide">
+      <div class="depart">
+        <i class="fa-solid fa-plane-departure"></i>
+        <select style="width: 70%;margin-bottom: 10px">
+          <option>--Departing Country--</option>
+          <option>Bangladesh</option>
+        </select>
+        <select>
+          <option>--Departing Airport--</option>
+          <option>Dhaka,Hazrat Shahjalal International Airport</option>
+          <option>Chattogram, Shah Amanat International Airport</option>
+          <option>Barisal, Barishal Airport</option>
+          <option>Jashore, Jashore Airport</option>
+          <option>Cox's Bazar, Cox's Bazar Airport</option>
+        </select>
+      </div>
+      <div class="arrive"><i class="fa-solid fa-plane-arrival"></i>
+        <select style="width: 70%;margin-bottom: 10px;">
+          <option>--Arriving Country--</option>
+          <option>Bangladesh</option>
+        </select>
+        <select>
+          <option>--Arriving Airport--</option>
+          <option>Dhaka,Hazrat Shahjalal International Airport</option>
+          <option>Chattogram, Shah Amanat International Airport</option>
+          <option>Barisal, Barishal Airport</option>
+          <option>Jashore, Jashore Airport</option>
+          <option>Cox's Bazar, Cox's Bazar Airport</option>
+        </select>
+      </div>
+    </div>
+      <div class="check_but"><button onclick="location.href='{% url 'book_vehicle' %}'">Check</button></div>
+    </div>
+  </div>
+  <iframe class="map" width="40%" height="450px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=88.0119,20.5635,92.6739,26.6387&layer=mapnik"
+    style="border: 1px solid black;"></iframe>
+    <a href="{% url 'home' %}">Visit our page</a>
+</div>
+<div class="wrapper">
+  <div class="title">
+    <h1>Our Services</h1>
+    <p>Summary of our features</p>
+  </div>
+  <div class="services-section">
+    <div class="card">
+      <div class="icon">
+        <i class="fa-solid fa-car"></i>
+      </div>
+      <h2>Car Ride</h2>
+      <p>Car Ride service for safe, reliable, and comfortable journeys. Enjoy real-time Tracking, transparent pricing,
+        and top-notch customer care every ride...</p>
+      <a href="" class="button_service">Read More</a>
+    </div>
+    <div class="card">
+      <div class="icon">
+        <i class="fa-solid fa-motorcycle"></i>
+      </div>
+      <h2>Bike Ride</h2>
+      <p>Bike ride service for quick, eco-friendly, and cost-effective travel. Navigate through teraffic easily while
+        enjoying real-time tracking and flexible routes... </p>
+      <a href="" class="button_service">Read More</a>
+    </div>
+    <div class="card">
+      <div class="icon">
+        <i class="fa-solid fa-bicycle"></i>
+      </div>
+      <h2>Bicycle Delivery</h2>
+      <p>Bicycle delivery service not only promotes sustainability but also creates employment opportunities for all.
+        With minimal barries to entry, anyone can ...</p>
+      <a href="" class="button_service">Read More</a>
+    </div>
+  </div>
+  <div class="services-section">
+    <div class="card">
+      <div class="icon">
+        <i class="fa-solid fa-box"></i>
+      </div>
+      <h2>Door-to-Door service</h2>
+      <p>Door-to-door service offers unmatched convenience by delivering your parcels directly to your doorstep. With
+        reliable, timely pickups and deliveries, we ensure a ...</p>
+      <a href="" class="button_service">Read More</a>
+    </div>
+    <div class="card">
+      <div class="icon">
+        <i class="fa-solid fa-truck-fast"></i>
+      </div>
+      <h2>Shipping</h2>
+      <p>With Shipping service, your parcel is sent to a nearby hib, where you can conveniently pick it up at your
+        prefered time. This Flexible opyion ensures secure handling and ...</p>
+      <a href="" class="button_service">Read More</a>
+    </div>
+    <div class="card">
+      <div class="icon">
+        <i class="fa-solid fa-tag"></i>
+      </div>
+      <h2>Discount on Services</h2>
+      <p>Enjoy exclusive savings on our services by using special coupon codes at checkout. Simply enter the code
+        during payment to unlock discounts and get the ... </p>
+      <a href="" class="button_service">Read More</a>
+    </div>
+  </div>
+</div>
+<div class="title1">
+  <h1>Reviews From Our Customers</h1>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  <p>
+</div>
+<div class="review">
+  <div class="review-box1">
+    <img src="{% static 'website/images/Nobel-Laureate-Professor-Muhammad-Yunus.jpg' %}" alt="Profile Picture"
+      class="profile-picture">
+    <div>
+      <h3>Dr. Yunus</h3>
+      <p>Really Helpful For the People of Bangladesh , Best Wishes for My Girls</p>
+    </div>
+  </div>
+
+  <div class="review-box2">
+    <img src="{% static 'website/images/bcl.jpg' %}" alt="Profile Picture" class="profile-picture">
+    <div>
+      <h3>Ucho Daa</h3>
+      <p>KOTO BORO SHAHOSH</p>
+    </div>
+  </div>
+  <div class="review-box1">
+    <img src="{% static 'website/images/454496237_472937288856680_6458637428935112450_n.jpg' %}" alt="Profile Picture"
+      class="profile-picture">
+    <div>
+      <h3>Shahabuddin Chuppu</h3>
+      <p>NICE AND ATTRACTIVE.</p>
+    </div>
+  </div>
+  <div class="review-box2">
+    <img src="{% static 'website/images/Obaidul_Quader.jpg' %}" alt="Profile Picture" class="profile-picture">
+    <div>
+      <h3>Obaidul Kader</h3>
+      <p>Kagooj e likhio na</p>
+      <p>Chire jabe</p>
+      <p>Over-confident hoye jeo na</p>
+      <p>Plane kore palabe</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

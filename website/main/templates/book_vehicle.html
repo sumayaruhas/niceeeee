@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Vehicle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #333333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555555;
+        }
+        input, select, button {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function filterVehicles() {
+            const selectedMedium = document.getElementById("medium").value;
+            const vehicleOptions = document.querySelectorAll(".vehicle-option");
+
+            vehicleOptions.forEach(option => {
+                if (option.dataset.medium === selectedMedium || selectedMedium === "") {
+                    option.style.display = "block";
+                } else {
+                    option.style.display = "none";
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Book a Vehicle</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="medium">Choose Medium:</label>
+            <select id="medium" name="medium" onchange="filterVehicles()">
+                <option value="">-- Select Medium --</option>
+                {% for medium in mediums %}
+                    <option value="{{ medium.name }}">{{ medium.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="vehicle">Choose Vehicle:</label>
+            <select id="vehicle" name="vehicle_id">
+                <option value="">-- Select Vehicle --</option>
+                {% for vehicle in vehicles %}
+                    <option class="vehicle-option" data-medium="{{ vehicle.medium.name }}" value="{{ vehicle.id }}">{{ vehicle.name }} - {{ vehicle.license_plate }}</option>
+                {% endfor %}
+            </select>
+
+            {{ form.as_p }}
+
+            <button type="submit">Book Now</button>
+        </form>
+    </div>
+</body>
+</html>

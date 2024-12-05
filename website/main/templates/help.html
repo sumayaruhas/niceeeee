@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form id="helpRequestFormhelp" action="{% url 'help_request' %}" method="post">
+    {% csrf_token %}
+    <div class="formSectionhelp" id="usernameSection">
+        <label for="usernameField" class="formLabelhelp">Your Name:</label>
+        <input type="text" id="usernameFieldhelp" name="name" class="inputFieldhelp" placeholder="Enter your name" required>
+    </div>
+
+    <div class="formSectionhelp" id="emailSection">
+        <label for="emailField" class="formLabelhelp">Your Email:</label>
+        <input type="email" id="emailFieldhelp" name="email" class="inputFieldhelp" placeholder="Enter your email" required>
+    </div>
+
+    <div class="formSectionhelp" id="helpTypeSectionhelp">
+        <label for="helpTypeField" class="formLabelhelp">Type of Help Needed:</label>
+        <select id="helpTypeFieldhelp" name="help_type" class="inputFieldhelp" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="financial">Financial Assistance</option>
+            <option value="emotional">Emotional Support</option>
+            <option value="technical">Technical Assistance</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+
+    <div class="formSectionhelp" id="messageSectionhelp">
+        <label for="messageField" class="formLabelhelp">Your Message:</label>
+        <textarea id="messageFieldhelp" name="message" class="textareaFieldhelp" placeholder="Describe your situation..." required></textarea>
+    </div>
+
+    <a href="{% url 'help_success' %}" class="thakna"><button type="submit" class="submitButtonhelp" id="submitHelpButton">Submit Request</button></a>
+</form>
+{% endblock %}
