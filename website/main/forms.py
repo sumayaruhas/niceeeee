@@ -40,11 +40,8 @@ class HelpRequestForm(forms.ModelForm):
             ])
         }
 
+
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['pickup_location', 'dropoff_location', 'date', 'time']
-        widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'time': forms.TimeInput(attrs={'type': 'time'}),
-        }
+        fields = ['customer', 'vehicle', 'booking_date', 'status']

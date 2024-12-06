@@ -69,6 +69,7 @@
         <h2>Book a Vehicle</h2>
         <form method="POST">
             {% csrf_token %}
+            
             <label for="medium">Choose Medium:</label>
             <select id="medium" name="medium" onchange="filterVehicles()">
                 <option value="">-- Select Medium --</option>
@@ -88,6 +89,18 @@
                 <option class="vehicle-option" data-medium="water" value="6">Boat - B1234</option>
                 <option class="vehicle-option" data-medium="water" value="7">Submarine - S5678</option>
             </select>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="pickup_location">Pickup Location:</label>
+            <input type="text" id="pickup_location" name="pickup_location" placeholder="Enter pickup location" required>
+
+            <label for="dropoff_location">Dropoff Location:</label>
+            <input type="text" id="dropoff_location" name="dropoff_location" placeholder="Enter dropoff location" required>
 
             <button type="submit">Book Now</button>
         </form>

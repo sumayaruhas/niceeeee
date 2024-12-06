@@ -28,5 +28,6 @@ path('suggest_page/', views.suggest_page, name="suggest_page"),
     path('booking-success/', views.booking_success, name='booking_success')
     
 ]
- # cd website
-  # python manage.py runserver
+
+# cd website
+# python manage.py runserver

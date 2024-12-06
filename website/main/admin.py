@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import CustomUser, DriverProfile, CustomerProfile
+from .models import Booking  # import the Booking model
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
@@ -9,11 +10,24 @@ class CustomUserAdmin(admin.ModelAdmin):
 @admin.register(DriverProfile)
 class DriverProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'license_number')
-    
-def get_queryset(self, request):
+
+    # Custom queryset to show only drivers
+    def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset.filter(user__user_type='driver')
-    
+
 @admin.register(CustomerProfile)
 class CustomerProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'phone_number', 'address')
+
+    # Optionally customize how 'user' is displayed if needed
+    def user(self, obj):
+        return obj.user.username  # Display only the username for user field
+    user.admin_order_field = 'user'  # Allow ordering by user field
+
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('customer', 'vehicle', 'booking_date', 'status')  # Ensure these match model fields
+    list_filter = ('status', 'booking_date')  # Ensure these match model fields
+
+admin.site.register(Booking, BookingAdmin)
+

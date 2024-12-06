@@ -8,6 +8,8 @@ from .models import HelpRequest
 from .forms import BookingForm
 from .models import VehicleMedium, Vehicle
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+
 
 def help_request_view(request):
     if request.method == 'POST':
@@ -110,11 +112,19 @@ def logout_view(request):
 
 def book_vehicle(request):
     if request.method == 'POST':
-        # Your logic to handle form submission
-        vehicle_id = request.POST.get('vehicle_id')
-        # Process the data...
-        return redirect('booking_success')  # Redirect to a success page or somewhere else
-    return render(request, 'book_vehicle.html') 
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.customer = request.user 
+            booking.save()
+            return redirect('booking_success')  
+        else:
+            
+            return render(request, 'book_vehicle.html', {'form': form, 'error': 'Form validation failed'})
+
+
+    form = BookingForm()
+    return render(request, 'book_vehicle.html', {'form': form})
 
 
 def booking_success(request):

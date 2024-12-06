@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.utils.timezone import now
+
 
 class CustomUser(AbstractUser):
     USER_TYPE_CHOICES = (
@@ -52,13 +55,19 @@ class Vehicle(models.Model):
     def __str__(self):
         return f"{self.name} ({self.medium.name})"
 
-class Booking(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    pickup_location = models.CharField(max_length=200)
-    dropoff_location = models.CharField(max_length=200)
-    date = models.DateField()
-    time = models.TimeField()
+  
 
-    def __str__(self):
-        return f"{self.user.username} - {self.vehicle.name} on {self.date}"
+from django.db import models
+
+from django.utils.timezone import now
+
+class Booking(models.Model):
+    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='bookings')
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    booking_date = models.DateField()
+    status = models.CharField(
+        max_length=50,
+        choices=[('Pending', 'Pending'), ('Confirmed', 'Confirmed'), ('Cancelled', 'Cancelled')],
+        default='Pending'
+    )
+
