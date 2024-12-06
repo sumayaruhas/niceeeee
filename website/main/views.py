@@ -108,28 +108,14 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-@login_required
 def book_vehicle(request):
-    mediums = VehicleMedium.objects.all()
-    vehicles = Vehicle.objects.all()
-
     if request.method == 'POST':
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            booking = form.save(commit=False)
-            booking.user = request.user
-            vehicle_id = request.POST.get('vehicle_id')
-            booking.vehicle = Vehicle.objects.get(id=vehicle_id)
-            booking.save()
-            return redirect('booking_success')
-    else:
-        form = BookingForm()
+        # Your logic to handle form submission
+        vehicle_id = request.POST.get('vehicle_id')
+        # Process the data...
+        return redirect('booking_success')  # Redirect to a success page or somewhere else
+    return render(request, 'book_vehicle.html') 
 
-    return render(request, 'book_vehicle.html', {
-        'form': form,
-        'mediums': mediums,
-        'vehicles': vehicles
-    })
 
 def booking_success(request):
     return render(request, 'booking_success.html')

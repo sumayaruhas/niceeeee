@@ -72,20 +72,22 @@
             <label for="medium">Choose Medium:</label>
             <select id="medium" name="medium" onchange="filterVehicles()">
                 <option value="">-- Select Medium --</option>
-                {% for medium in mediums %}
-                    <option value="{{ medium.name }}">{{ medium.name }}</option>
-                {% endfor %}
+                <option value="road">Road</option>
+                <option value="air">Air</option>
+                <option value="water">Water</option>
             </select>
 
             <label for="vehicle">Choose Vehicle:</label>
             <select id="vehicle" name="vehicle_id">
                 <option value="">-- Select Vehicle --</option>
-                {% for vehicle in vehicles %}
-                    <option class="vehicle-option" data-medium="{{ vehicle.medium.name }}" value="{{ vehicle.id }}">{{ vehicle.name }} - {{ vehicle.license_plate }}</option>
-                {% endfor %}
+                <option class="vehicle-option" data-medium="road" value="1">Car - ABC123</option>
+                <option class="vehicle-option" data-medium="road" value="2">Bike - XYZ789</option>
+                <option class="vehicle-option" data-medium="road" value="3">Bus - BUS456</option>
+                <option class="vehicle-option" data-medium="air" value="4">Helicopter - H12345</option>
+                <option class="vehicle-option" data-medium="air" value="5">Private Jet - PJ6789</option>
+                <option class="vehicle-option" data-medium="water" value="6">Boat - B1234</option>
+                <option class="vehicle-option" data-medium="water" value="7">Submarine - S5678</option>
             </select>
-
-            {{ form.as_p }}
 
             <button type="submit">Book Now</button>
         </form>
