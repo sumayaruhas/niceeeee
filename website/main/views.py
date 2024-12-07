@@ -110,21 +110,26 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+
+@login_required
 def book_vehicle(request):
+
+    vehicles = Vehicle.objects.all()
+
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
             booking = form.save(commit=False)
-            booking.customer = request.user 
+            booking.customer = request.user
             booking.save()
-            return redirect('booking_success')  
+            return redirect('booking_success')
         else:
-            
-            return render(request, 'book_vehicle.html', {'form': form, 'error': 'Form validation failed'})
+            return render(request, 'book_vehicle.html', {'form': form, 'error': 'Form validation failed', 'vehicles': vehicles})
 
-
-    form = BookingForm()
-    return render(request, 'book_vehicle.html', {'form': form})
+    else:
+        form = BookingForm()
+    
+    return render(request, 'book_vehicle.html', {'form': form, 'vehicles': vehicles})
 
 
 def booking_success(request):

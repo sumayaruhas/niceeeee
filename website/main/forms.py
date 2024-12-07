@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Booking, VehicleMedium
+from .models import CustomUser, Booking, VehicleMedium,  Vehicle
 
 class CustomerSignUpForm(UserCreationForm):
     class Meta:
@@ -44,4 +44,4 @@ class HelpRequestForm(forms.ModelForm):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['customer', 'vehicle', 'booking_date', 'status']
+        fields = ['vehicle', 'booking_date', 'status']

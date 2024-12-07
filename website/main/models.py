@@ -54,20 +54,28 @@ class Vehicle(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.medium.name})"
+    
 
-  
+class Vehicle(models.Model):
+    MEDIUM_CHOICES = (
+        ('road', 'Road'),
+        ('air', 'Air'),
+        ('water', 'Water'),
+    )
+    name = models.CharField(max_length=100)
+    medium = models.CharField(max_length=50, blank=True, null=True)  # Add medium if needed
 
-from django.db import models
+    def __str__(self):
+        return self.name
 
-from django.utils.timezone import now
 
+import datetime
 class Booking(models.Model):
-    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='bookings')
+    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='bookings', default=1)  # Set default user ID
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    booking_date = models.DateField()
+    booking_date = models.DateField(default=datetime.date.today)
     status = models.CharField(
         max_length=50,
         choices=[('Pending', 'Pending'), ('Confirmed', 'Confirmed'), ('Cancelled', 'Cancelled')],
         default='Pending'
     )
-
