@@ -40,8 +40,3 @@ class HelpRequestForm(forms.ModelForm):
             ])
         }
 
-
-class BookingForm(forms.ModelForm):
-    class Meta:
-        model = Booking
-        fields = ['vehicle', 'booking_date', 'status']

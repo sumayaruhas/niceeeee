@@ -45,17 +45,7 @@ class VehicleMedium(models.Model):
 
     def __str__(self):
         return self.name
-
-class Vehicle(models.Model):
-    medium = models.ForeignKey(VehicleMedium, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    license_plate = models.CharField(max_length=50)
-    capacity = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.name} ({self.medium.name})"
     
-
 class Vehicle(models.Model):
     MEDIUM_CHOICES = (
         ('road', 'Road'),
@@ -68,14 +58,3 @@ class Vehicle(models.Model):
     def __str__(self):
         return self.name
 
-
-import datetime
-class Booking(models.Model):
-    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='bookings', default=1)  # Set default user ID
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    booking_date = models.DateField(default=datetime.date.today)
-    status = models.CharField(
-        max_length=50,
-        choices=[('Pending', 'Pending'), ('Confirmed', 'Confirmed'), ('Cancelled', 'Cancelled')],
-        default='Pending'
-    )
