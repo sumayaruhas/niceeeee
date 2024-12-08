@@ -1,8 +1,11 @@
+from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from multiselectfield import MultiSelectField
+
 
 
 class CustomUser(AbstractUser):
@@ -57,4 +60,50 @@ class Vehicle(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class CarReg(models.Model):
+    DISTRICT_CHOICES = [
+        ('Dhaka', 'Dhaka'),
+        ('Chattogram', 'Chattogram'),
+        ('Khulna', 'Khulna'),
+        ('Sylhet', 'Sylhet'),
+        ('Rajshahi', 'Rajshahi'),
+        ('Barishal', 'Barishal'),
+        ('Rangpur', 'Rangpur'),
+        ('Mymensingh', 'Mymensingh'),
+    ]
+
+    COUNTRY_CHOICES = [
+        ('Bangladesh', 'Bangladesh'),
+    ]
+
+    CITY_CHOICES = [
+        ('Dhaka', 'Dhaka'),
+        ('Chattogram', 'Chattogram'),
+        ('Khulna', 'Khulna'),
+        ('Sylhet', 'Sylhet'),
+        ('Rajshahi', 'Rajshahi'),
+        ('Barishal', 'Barishal'),
+        ('Rangpur', 'Rangpur'),
+        ('Mymensingh', 'Mymensingh'),
+    ]
+    
+
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    phonenumber = models.IntegerField()
+    district = models.CharField(max_length=100, choices=DISTRICT_CHOICES)
+    country = models.CharField(max_length=100, choices=COUNTRY_CHOICES)
+    city = models.CharField(max_length=100, choices=CITY_CHOICES)
+    Transportation = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Car Registration"
+        verbose_name_plural = "Car Registrations"
+
+    def __str__(self):
+        return f"{self.firstname} {self.lastname}"
+    
+
 

@@ -20,46 +20,55 @@
             <p>Bicycle</p>
           </div></a>
         </div>
-        <div class="real-info">
+        <form method = "POST" enctype="multipart/form-data">
+          {% csrf_token %}
+        <div class="real-info" >
           <p style="font-size: 30px;font-weight: 900;">REGISTER NOW</p>
           <div class="urname">
             <div id="fname">
               <p>First Name</p>
-              <input placeholder="Enter your first name">
+              <input placeholder="Enter your first name" name="firstname" required>
             </div>
             <div id="lname">
               <p>Last Name</p>
-              <input placeholder="Enter your last name">
+              <input placeholder="Enter your last name" name="lastname" required>
             </div>
-          </div>
-          <div id="pnumber">
-            <p>Enter your number</p>
-            <input placeholder="01XXXXXXXXX">
           </div>
           <div class="loca">
-            <div id="country">
-              <p>Country</p>
-              <select>
-                <option>--Select Country--</option>
-                <option>Bangladesh</option>
+          <div id="pnumber">
+            <p>Enter your number</p>
+            <input placeholder="01XXXXXXXXX" name="phonenumber" required>
+          </div>
+          <div id="country" >
+            <p>Country</p>
+              <select name="country" required>
+                {% for country,label in countries%}
+                  <option value="{{ country }}">{{ country }}</option>
+                {% endfor %}
+              </select>
+          </div></div>
+          <div class="loca">
+            <div id="district">
+              <p>District</p >
+              <select name="district" required>
+                {% for district,label in districts%}
+                  <option value="{{ district }}">{{ district }}</option>
+                {% endfor %}
               </select>
             </div>
-            <div id="city">
+            <div id="city" >
               <p>City</p>
-              <select>
-                <option>--Select City--</option>
-                <option>Dhaka</option>
-                <option>Chattogram</option>
-                <option>Khulna</option>
-                <option>Rajshahi</option>
-                <option>Barisal</option>
+              <select name="city" required>
+                {% for city,label in cities%}
+                  <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>
           <div class="which_serv">
             <p>Service(s) you want to provide</p>
             <div class="checkbox-container">
-              <input type="checkbox" id="fruit1" name="fruits" value="apple">
+              <input type="checkbox" id="fruit1" name="Transporation" value="apple">
               <span class="custom-checkbox"></span>
               <label for="fruit1">Transporation</label>
             </div>
@@ -68,10 +77,11 @@
             <p>You can earn up to</p>
             <p style="color: rgb(0, 47, 255);font-weight: 550;">৳60000</p>
           </div>
-          <div class="nxt_info">
+          <button class="nxt_info" type="submit">
             <p>Next Step</p><i class="fa-solid fa-right-long"></i>
-          </div>
+          </button>
         </div>
+        </form>
       </div>
       <div class="fea-rule">
         <div class="scroll">

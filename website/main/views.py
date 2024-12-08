@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import CustomerSignUpForm, DriverSignUpForm
 from .models import CustomUser
 from .models import HelpRequest
+from .models import *
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 
@@ -41,7 +42,31 @@ def services(request):
     return render(request,'Services.html')
 
 def car_reg(request):
-    return render(request,'car_reg.html')
+    countries = CarReg.COUNTRY_CHOICES
+    districts = CarReg.DISTRICT_CHOICES
+    cities = CarReg.CITY_CHOICES
+    if request.method == "POST":
+        data = request.POST
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        phonenumber = request.POST.get('phonenumber')
+        district = request.POST.get('district')
+        country = request.POST.get('country')
+        city = request.POST.get('city')
+        transportation = request.POST.get('Transportation') == 'on'  
+        
+        new_entry = CarReg(
+            firstname=firstname,
+            lastname=lastname,
+            phonenumber=phonenumber,
+            district=district,
+            country=country,
+            city=city,
+            Transportation=transportation,
+        )
+        new_entry.save()
+        return redirect ('/registration/car/')
+    return render(request, 'car_reg.html',{'countries':countries, 'districts':districts,'cities': cities})
 
 def bike_reg(request):
     return render(request,'bike_reg.html')
@@ -107,3 +132,4 @@ def customer_login(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+

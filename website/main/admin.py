@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, DriverProfile, CustomerProfile
+from .models import *
 
 
 # import the Booking model
@@ -27,4 +27,14 @@ class CustomerProfileAdmin(admin.ModelAdmin):
         return obj.user.username  # Display only the username for user field
     user.admin_order_field = 'user'  # Allow ordering by user field
 
+@admin.register(CarReg)
+class CarRegAdmin(admin.ModelAdmin):
+    list_display = ('firstname', 'lastname', 'phonenumber', 'district', 'country', 'city', 'Transportation')
+    search_fields = ('firstname', 'lastname', 'phonenumber', 'district', 'country', 'city')
+    list_filter = ('Transportation',)
 
+    fieldsets = (
+        (None, {
+             'fields': ('firstname', 'lastname', 'phonenumber', 'district', 'country', 'city', 'Transporation')
+         }),
+     )
