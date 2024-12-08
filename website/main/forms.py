@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Booking, VehicleMedium,  Vehicle
+from .models import CustomUser
 
 class CustomerSignUpForm(UserCreationForm):
     class Meta:

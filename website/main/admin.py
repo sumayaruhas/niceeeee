@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import CustomUser, DriverProfile, CustomerProfile
-from .models import Booking  
-from .models import Vehicle
+
 
 # import the Booking model
 
