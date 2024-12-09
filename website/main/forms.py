@@ -41,6 +41,15 @@ class HelpRequestForm(forms.ModelForm):
         }
 
 
+from .models import Deal
+
+class DealForm(forms.ModelForm):
+    class Meta:
+        model = Deal
+        fields = ['title', 'description', 'status']  # Exclude 'clicked_by' to set it in the view
+
+
+
 
 
 

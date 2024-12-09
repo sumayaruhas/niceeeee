@@ -38,3 +38,12 @@ class CarRegAdmin(admin.ModelAdmin):
              'fields': ('firstname', 'lastname', 'phonenumber', 'district', 'country', 'city', 'Transporation')
          }),
      )
+
+
+from .models import Deal
+
+@admin.register(Deal)
+class DealAdmin(admin.ModelAdmin):
+    list_display = ('title', 'status', 'clicked_by', 'created_at')
+    list_filter = ('status', 'created_at')
+    search_fields = ('title', 'description')

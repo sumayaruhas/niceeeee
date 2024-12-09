@@ -133,3 +133,20 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+from .models import Deal
+from .forms import DealForm
+
+@login_required
+def create_deal(request):
+    if request.method == 'POST':
+        form = DealForm(request.POST)
+        if form.is_valid():
+            deal = form.save(commit=False)
+            deal.clicked_by = request.user  # Use the logged-in user
+            deal.save()
+            return redirect('deal_list')  # Redirect to a list of deals
+    else:
+        form = DealForm()
+    return render(request, 'create_deal.html', {'form': form})
+
+
