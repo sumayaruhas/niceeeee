@@ -24,9 +24,9 @@ path('suggest_page/', views.suggest_page, name="suggest_page"),
     path('registration/bike/', views.bike_reg, name='bike_registration'),
     path('registration/bicycle/', views.car_reg, name='bicycle_registration'),
     path('help', views.help, name='help'),
-    path('deals', views.Deal, name='deals')
-    
-]
+   path('deals/', views.deals_list, name='deals'),
+    path('deal/<int:deal_id>/claim/', views.click_deal, name='click_deal'),
+    ]
 
 # cd website
 # python manage.py runserver

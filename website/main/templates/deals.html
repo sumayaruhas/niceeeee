@@ -1,11 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Available Deals</h1>
 <ul>
-  {% for deal in deals %}
+    {% for deal in deals %}
     <li>
-      <strong>{{ deal.title }}</strong> - {{ deal.description }}<br>
-      Status: {{ deal.status }}<br>
-      Created by: {{ deal.clicked_by.username|default:"N/A" }}<br>
-      Created at: {{ deal.created_at }}
+        <h3>{{ deal.title }}</h3>
+        <p>{{ deal.description }}</p>
+        <a href="{% url 'click_deal' deal.id %}">Claim Deal</a>
     </li>
-  {% endfor %}
+    {% endfor %}
 </ul>
+{% endblock %}

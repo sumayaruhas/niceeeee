@@ -3,12 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import CustomerSignUpForm, DriverSignUpForm
-from .models import CustomUser
 from .models import HelpRequest
 from .models import *
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-
+from .models import Deal, DealStatus
 
 def help_request_view(request):
     if request.method == 'POST':
@@ -77,9 +76,6 @@ def bicycle_reg(request):
 def help(request):
     return render(request,'help.html')
 
-def customer_dashboard(request):
-    return render(request, 'customer_dashboard.html')
-
 def driver_dashboard(request):
     return render(request, 'driver_dashboard.html')
 
@@ -133,20 +129,18 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-from .models import Deal
-from .forms import DealForm
+@login_required
+def deals_list(request):
+    deals = Deal.objects.all()
+    return render(request, 'deals.html', {'deals': deals})
 
 @login_required
-def create_deal(request):
-    if request.method == 'POST':
-        form = DealForm(request.POST)
-        if form.is_valid():
-            deal = form.save(commit=False)
-            deal.clicked_by = request.user  # Use the logged-in user
-            deal.save()
-            return redirect('deal_list')  # Redirect to a list of deals
-    else:
-        form = DealForm()
-    return render(request, 'create_deal.html', {'form': form})
+def click_deal(request, deal_id):
+    deal = get_object_or_404(Deal, id=deal_id)
+    DealStatus.objects.get_or_create(user=request.user, deal=deal)
+    return redirect('customer_dashboard')  # Redirect to the user's dashboard
 
-
+@login_required
+def customer_dashboard(request):
+    deal_statuses = DealStatus.objects.filter(user=request.user)
+    return render(request, 'customer_dashboard.html', {'deal_statuses': deal_statuses})

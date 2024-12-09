@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-
+from .models import Deal, DealStatus
 
 # import the Booking model
 
@@ -39,11 +39,10 @@ class CarRegAdmin(admin.ModelAdmin):
          }),
      )
 
-
-from .models import Deal
-
 @admin.register(Deal)
 class DealAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'clicked_by', 'created_at')
-    list_filter = ('status', 'created_at')
-    search_fields = ('title', 'description')
+    list_display = ['title', 'description', 'created_at']
+
+@admin.register(DealStatus)
+class DealStatusAdmin(admin.ModelAdmin):
+    list_display = ['user', 'deal', 'status']

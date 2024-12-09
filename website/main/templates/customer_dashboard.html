@@ -19,6 +19,7 @@
         <li><a href="#">Saved Addresses</a></li>
         <li><a href="#">Payment Methods</a></li>
       </ul>
+      
     </div>
     <div class="dashboard-section">
       <h2>Support</h2>
@@ -27,6 +28,22 @@
         <li><a href="#">FAQs</a></li>
       </ul>
     </div>
+</div>
+
+{% block dashboard_content %}
+<h1>Your Dashboard</h1>
+<h2>Claimed Deals</h2>
+<ul>
+    {% for deal_status in deal_statuses %}
+    <li>
+        <h3>{{ deal_status.deal.title }}</h3>
+        
+        <p>Status: {{ deal_status.status }}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
   </div>
 </div>
 
