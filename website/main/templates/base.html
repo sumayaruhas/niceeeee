@@ -29,13 +29,14 @@
       </div>
       {% if user.is_authenticated %}
       <!-- If the user is logged in, show the Logout option -->
-      {% if user.is_driver %}
+      {% if user.driver %}
       <a href="{% url 'driver_dashboard' %}" class="thakna" style="color: hsl(0, 0%, 100%);">
         <div>
           <i class="fa-regular fa-user"></i>
         </div>
       </a>
-      {% else %}
+      {% endif %}
+      {% if user.Customer %}
       <a href="{% url 'customer_dashboard' %}" class="thakna" style="color: hsl(0, 0%, 100%);">
         <div>
           <i class="fa-regular fa-user"></i>
