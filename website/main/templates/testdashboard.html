@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .approved {
+      color: green;
+    }
+
+    .pending {
+      color: orange;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dashboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Pickup Location</th>
+        <th>Dropoff Location</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+        <tr>
+          <td>{{ booking.name }}</td>
+          <td>{{ booking.pickup_location }}</td>
+          <td>{{ booking.dropoff_location }}</td>
+          <td class="{% if booking.is_approved %}approved{% else %}pending{% endif %}">
+            {% if booking.is_approved %}
+                Approved
+            {% else %}
+                Pending Approval
+            {% endif %}
+        </td>
+        
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if not bookings %}
+    <p>No bookings yet!</p>
+  {% endif %}
+</body>
+</html>

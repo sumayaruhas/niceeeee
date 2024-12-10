@@ -8,6 +8,8 @@ from .models import *
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from .models import Deal, DealStatus
+from django.urls import reverse
+from .forms import BookingForm
 
 def help_request_view(request):
     if request.method == 'POST':
@@ -144,3 +146,49 @@ def click_deal(request, deal_id):
 def customer_dashboard(request):
     deal_statuses = DealStatus.objects.filter(user=request.user)
     return render(request, 'customer_dashboard.html', {'deal_statuses': deal_statuses})
+
+def booking_page(request):
+    if request.method == 'POST':
+        pickup_location = request.POST.get('pickup_location')
+        dropoff_location = request.POST.get('dropoff_location')
+
+        # Store the data in the session or pass it to the form
+        request.session['pickup_location'] = pickup_location
+        request.session['dropoff_location'] = dropoff_location
+
+        return redirect(reverse('booking_form'))
+
+    return render(request, 'booking_page.html')
+
+def booking_form(request):
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            age = form.cleaned_data['age']
+            phone_number = form.cleaned_data['phone_number']
+            pickup_location = request.session.get('pickup_location')
+            dropoff_location = request.session.get('dropoff_location')
+            
+            # Save booking to the database (model creation needed)
+            # Booking.objects.create(...)
+
+            messages.success(request, 'Booking submitted successfully!')
+            return redirect('testdashboard')
+
+    else:
+        pickup_location = request.session.get('pickup_location', '')
+        dropoff_location = request.session.get('dropoff_location', '')
+        form = BookingForm()
+    
+    return render(request, 'booking_form.html', {
+        'form': form,
+        'pickup_location': pickup_location,
+        'dropoff_location': dropoff_location,
+    })
+    
+def testdashboard(request):
+    # Fetch the user's bookings
+    user_bookings = Booking.objects.all()  # Filter based on user if you have user accounts
+
+    return render(request, 'testdashboard.html', {'bookings': user_bookings})

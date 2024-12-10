@@ -45,12 +45,20 @@
         <p style="font-size: 15px;">Fly</p>
       </div>
     </div>
-    <div class="loc">
-      <div class="from"><input placeholder="Pickup Location">
-        <i class="fa-solid fa-location-dot" style="font-size: 25px;"></i>
+    <form method="POST" action="{% url 'booking_page' %}">
+      {% csrf_token %}
+      <div class="loc">
+        <div class="from">
+          <input name="pickup_location" placeholder="Pickup Location" required>
+          <i class="fa-solid fa-location-dot" style="font-size: 25px;"></i>
+        </div>
+        <div class="to">
+          <input name="dropoff_location" placeholder="Dropoff Location" required>
+        </div>
       </div>
-      <div class="to"> <input placeholder="Dropoff Location"></div>
-    </div>
+      <button type="submit" class="check-btn">Check</button>
+    </form>
+    
     <div class="parcel hide">
       <div class="Tracking"> <input placeholder="Enter Tracking ID"></div>
     </div>

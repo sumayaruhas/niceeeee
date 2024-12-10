@@ -1,0 +1,8 @@
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Pickup: {{ pickup_location }}</p>
+    <p>Dropoff: {{ dropoff_location }}</p>
+    <button type="submit">Submit</button>
+  </form>
+  

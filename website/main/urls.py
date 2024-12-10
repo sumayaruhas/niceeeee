@@ -29,6 +29,9 @@ path('suggest_page/', views.suggest_page, name="suggest_page"),
     path('help', views.help, name='help'),
    path('deals/', views.deals_list, name='deals'),
     path('deal/<int:deal_id>/claim/', views.click_deal, name='click_deal'),
+    path('booking-page/', views.booking_page, name='booking_page'),
+    path('booking-form/', views.booking_form, name='booking_form'),
+    path('testdashboard/', views.testdashboard, name='testdashboard'), 
     ]
 
 if settings.DEBUG:

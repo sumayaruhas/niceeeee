@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import *
 from .models import Deal, DealStatus
+from .models import Booking
+
 
 # import the Booking model
 
@@ -46,3 +48,13 @@ class DealAdmin(admin.ModelAdmin):
 @admin.register(DealStatus)
 class DealStatusAdmin(admin.ModelAdmin):
     list_display = ['user', 'deal', 'status']
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ('name', 'pickup_location', 'dropoff_location', 'is_approved')
+    list_filter = ('is_approved',)
+    actions = ['approve_bookings']
+
+    def approve_bookings(self, request, queryset):
+        queryset.update(is_approved=True)
+    approve_bookings.short_description = "Approve selected bookings"

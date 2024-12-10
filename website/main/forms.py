@@ -50,5 +50,10 @@ class DealForm(forms.ModelForm):
 
 
 
+class BookingForm(forms.Form):
+    name = forms.CharField(max_length=100, required=True)
+    age = forms.IntegerField(required=True, min_value=0)
+    phone_number = forms.CharField(max_length=15, required=True)
+
 
 

@@ -131,3 +131,14 @@ class DealStatus(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.deal.title} ({self.status})"
+    
+class Booking(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    phone_number = models.CharField(max_length=15)
+    pickup_location = models.CharField(max_length=255)
+    dropoff_location = models.CharField(max_length=255)
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Booking by {self.name}"
