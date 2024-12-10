@@ -41,7 +41,7 @@ class CarRegAdmin(admin.ModelAdmin):
 
 @admin.register(Deal)
 class DealAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description', 'created_at']
+    list_display = ['title', 'description', 'created_at', 'image']
 
 @admin.register(DealStatus)
 class DealStatusAdmin(admin.ModelAdmin):

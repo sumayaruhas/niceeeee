@@ -37,7 +37,9 @@
     {% for deal_status in deal_statuses %}
     <li>
         <h3>{{ deal_status.deal.title }}</h3>
-        
+        {% if deal_status.deal.image %}
+            <img src="{{ deal_status.deal.image.url }}" alt="{{ deal_status.deal.title }}" width="300">
+        {% endif %}
         <p>Status: {{ deal_status.status }}</p>
     </li>
     {% endfor %}

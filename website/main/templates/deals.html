@@ -7,6 +7,9 @@
     <li>
         <h3>{{ deal.title }}</h3>
         <p>{{ deal.description }}</p>
+        {% if deal.image %}
+            <img src="{{ deal.image.url }}" alt="{{ deal.title }}" width="300">
+        {% endif %}
         <a href="{% url 'click_deal' deal.id %}">Claim Deal</a>
     </li>
     {% endfor %}
