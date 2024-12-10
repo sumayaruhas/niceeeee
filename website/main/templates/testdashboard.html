@@ -50,13 +50,14 @@
           <td>{{ booking.name }}</td>
           <td>{{ booking.pickup_location }}</td>
           <td>{{ booking.dropoff_location }}</td>
-          <td class="{% if booking.is_approved %}approved{% else %}pending{% endif %}">
-            {% if booking.is_approved %}
+          <td class="{% if booking.status == 'approved' %}approved{% else %}pending{% endif %}">
+            {% if booking.status == 'approved' %}
                 Approved
             {% else %}
                 Pending Approval
             {% endif %}
         </td>
+        
         
         </tr>
       {% endfor %}

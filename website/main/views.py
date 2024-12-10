@@ -159,6 +159,9 @@ def booking_page(request):
         return redirect(reverse('booking_form'))
 
     return render(request, 'booking_page.html')
+from .models import Booking
+from django.contrib import messages
+from django.shortcuts import redirect, render
 
 def booking_form(request):
     if request.method == 'POST':
@@ -167,11 +170,17 @@ def booking_form(request):
             name = form.cleaned_data['name']
             age = form.cleaned_data['age']
             phone_number = form.cleaned_data['phone_number']
-            pickup_location = request.session.get('pickup_location')
-            dropoff_location = request.session.get('dropoff_location')
-            
-            # Save booking to the database (model creation needed)
-            # Booking.objects.create(...)
+            pickup_location = request.session.get('pickup_location', '')
+            dropoff_location = request.session.get('dropoff_location', '')
+
+            # Save booking to the database
+            Booking.objects.create(
+                name=name,
+                age=age,
+                phone_number=phone_number,
+                pickup_location=pickup_location,
+                dropoff_location=dropoff_location
+            )
 
             messages.success(request, 'Booking submitted successfully!')
             return redirect('testdashboard')

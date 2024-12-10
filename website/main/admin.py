@@ -49,12 +49,16 @@ class DealAdmin(admin.ModelAdmin):
 class DealStatusAdmin(admin.ModelAdmin):
     list_display = ['user', 'deal', 'status']
 
+
+
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('name', 'pickup_location', 'dropoff_location', 'is_approved')
-    list_filter = ('is_approved',)
+    list_display = ('name', 'pickup_location', 'dropoff_location', 'status')
+    list_filter = ('status',)
     actions = ['approve_bookings']
 
     def approve_bookings(self, request, queryset):
-        queryset.update(is_approved=True)
+        queryset.update(status='approved')  # Update the 'status' field
+        self.message_user(request, "Selected bookings have been approved.")  # Optional success message
+
     approve_bookings.short_description = "Approve selected bookings"
