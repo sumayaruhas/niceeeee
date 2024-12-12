@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Available Deals</h1>
-<ul>
-    {% for deal in deals %}
-    <li>
-        <h3>{{ deal.title }}</h3>
-        <p>{{ deal.description }}</p>
-        {% if deal.image %}
-            <img src="{{ deal.image.url }}" alt="{{ deal.title }}" width="300">
-        {% endif %}
-        <a href="{% url 'click_deal' deal.id %}">Claim Deal</a>
-    </li>
-    {% endfor %}
-</ul>
+<div style="align-items: center;display: flex;flex-direction: column;">
+    <h1 class="dealsheader">Available Deals</h1>
+    <ul>
+        {% for deal in deals %}
+        <li>
+            <div class="dealsbox">
+                <h3 class="dealstitle">{{ deal.title }}</h3>
+                <p class="dealsdes">{{ deal.description }}</p>
+                {% if deal.image %}
+                <div class="dealimg">
+                    <img src="{{ deal.image.url }}" alt="{{ deal.title }}" width="300">
+                </div>
+                {% endif %}
+                <a href="{% url 'click_deal' deal.id %}" class="thakna">
+                    <div class="claimd"><p> Claim Deal<p></div>
+                </a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

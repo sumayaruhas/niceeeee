@@ -1189,3 +1189,64 @@ html {
     color: white;
     margin-top: 20px;
 } 
+
+.dealsheader{
+    letter-spacing: 5px;
+    font-size: 50px;
+    font-style: italic;
+    text-shadow: 2px 5px 4px rgb(158, 95, 0);
+}
+
+.dealsbox{
+    background-color: #F0BB78;
+    margin: 20px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
+    width: 55vw;
+}
+
+.dealstitle{
+color: #422907;
+font-size: 40px;
+font-family: Georgia;
+font-style: italic;
+margin: 0 20px;
+}
+
+.dealsdes{
+    background-color: #FFF0DC;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #422907;
+}
+
+.dealimg{
+    width: fit-content;
+    height: 310px;
+    object-fit: contain;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.claimd{
+    width: fit-content;
+    background-color: #422907;
+    color: #FFF0DC;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 5px 4px rgb(158, 95, 0);
+}
+.claimd p{font-size: 20px;}
+
+.claimd :hover{
+    cursor: pointer;
+}

@@ -160,8 +160,8 @@ class CarRegister(models.Model):
         ('THA','THA'),
     ]
     
-    profilepic = models.ImageField(default="/static/website/images/profile.jpeg", upload_to='profilepic/', null=True, blank=True)
-    carpic = models.ImageField(default="/static/website/images/th.jpeg", upload_to='carpic/', null=True, blank=True)
+    profilepic = models.ImageField(default="/media/profile.jpeg", upload_to='profilepic/', null=True, blank=True)
+    carpic = models.ImageField(default="/media/th.jpeg", upload_to='carpic/', null=True, blank=True)
     firstname = models.CharField(max_length=100,default='')
     lastname = models.CharField(max_length=100,default='')
     district = models.CharField(max_length=100, default='')
@@ -180,7 +180,7 @@ class CarRegister(models.Model):
     nid = models.CharField(max_length=20,default='n/a')
     email = models.EmailField(default='')
     reg_no = models.CharField(max_length=100, blank=True, null=True)
-    password = models.CharField(max_length=255,default='123abc')
+    password = models.CharField(max_length=255)
 
 
     class Meta:

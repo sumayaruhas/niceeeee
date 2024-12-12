@@ -48,11 +48,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from datetime import datetime
- # Assuming CarReg is a custom model
+
 
 def car_reg(request):
     if request.method == 'POST':  
-        # Extract data from the form
+        
         email = request.POST.get('email')
         password = request.POST.get('password')
         firstname = request.POST.get('firstname')
@@ -61,7 +61,7 @@ def car_reg(request):
         district = request.POST.get('district')
         country = request.POST.get('country')
         city = request.POST.get('city')
-        transportation = request.POST.get('Transportation') == 'on'
+        transportation = request.POST.get('Transportation')=='on'
         gender = request.POST.get('gender')
         car_brand = request.POST.get('brand')
         car_model = request.POST.get('model')
@@ -75,14 +75,12 @@ def car_reg(request):
         selected_date = request.POST.get('selected_date')
 
         hashed_password=make_password(password)
-        # Convert selected date to date object
+        
         selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date() if selected_date else None
 
-        # Validate mandatory fields
         if not email or not password or not firstname or not lastname or not phonenumber:
             return render(request, 'car_reg.html', {'error': 'All fields are required!'})
 
-        # Create a CarReg instance
         user = CarRegister.objects.create(
             firstname=firstname,
             lastname=lastname,
@@ -114,10 +112,8 @@ def car_reg(request):
             login(request, django_user)
             user.save()
             return redirect('home') 
-        
         return render(request, 'car_reg.html', {'error': 'Authentication failed. Please check your credentials.'})
 
-    # Preload dropdown choices
     params = {
         'countries': CarRegister.COUNTRY_CHOICES,
         'districts': CarRegister.DISTRICT_CHOICES,
@@ -161,15 +157,12 @@ def driver_login(request):
         email = request.POST.get('username')
         password = request.POST.get('password')
         existing_user = CarRegister.objects.filter(email=email).first()
-        print('password:' ,password)
-        print( check_password(password, existing_user.password))
         if existing_user and check_password(password, existing_user.password):
             request.session['user_id'] = existing_user.id
             existing_user.last_login = timezone.now()
             existing_user.save()
             return redirect('driver_dashboard')  
         return render(request, 'home.html', {'error': "Invalid credentials or not a driver."})
-         
     return render(request, 'driver_login.html')
 
 def customer_login(request):
@@ -186,6 +179,7 @@ def customer_login(request):
   
 def logout_view(request):
     logout(request)
+    request.session.flush() 
     return redirect('home')
 
 @login_required
