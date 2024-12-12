@@ -180,6 +180,7 @@ class CarRegister(models.Model):
     nid = models.CharField(max_length=20,default='n/a')
     email = models.EmailField(default='')
     reg_no = models.CharField(max_length=100, blank=True, null=True)
+    password = models.CharField(max_length=255,default='123abc')
 
 
     class Meta:

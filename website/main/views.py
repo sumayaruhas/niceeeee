@@ -10,6 +10,8 @@ from django.shortcuts import get_object_or_404
 from .models import Deal, DealStatus
 from django.urls import reverse
 from .forms import BookingForm
+from django.contrib.auth.hashers import *
+from django.utils import timezone 
 
 def help_request_view(request):
     if request.method == 'POST':
@@ -72,6 +74,7 @@ def car_reg(request):
         license_no = request.POST.get('license_no')
         selected_date = request.POST.get('selected_date')
 
+        hashed_password=make_password(password)
         # Convert selected date to date object
         selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date() if selected_date else None
 
@@ -100,6 +103,7 @@ def car_reg(request):
             email=email,
             license_no=license_no,
             selected_date=selected_date,
+            password=hashed_password,
         )
         
         user.reg_no = f"{reg_area_code}{reg_category}{reg_digits}"
@@ -150,26 +154,22 @@ def customer_sign_up(request):
     return render(request, 'customer_sign_up.html', {'form': form, 'user_type': 'Customer'})
 
 def driver_sign_up(request):
-    if request.method == 'POST':
-        form = DriverSignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('driver_dashboard')
-    else:
-        form = DriverSignUpForm()
-    return render(request, 'sign_up.html', {'form': form, 'user_type': 'Driver'})
+    return render(request, 'car_reg.html')
 
 def driver_login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None and user.user_type == 'driver':
-            login(request, user)
-            return redirect('driver_dashboard')  # Redirect to driver dashboard
-        else:
-            messages.error(request, "Invalid credentials or not a driver.")
+        email = request.POST.get('username')
+        password = request.POST.get('password')
+        existing_user = CarRegister.objects.filter(email=email).first()
+        print('password:' ,password)
+        print( check_password(password, existing_user.password))
+        if existing_user and check_password(password, existing_user.password):
+            request.session['user_id'] = existing_user.id
+            existing_user.last_login = timezone.now()
+            existing_user.save()
+            return redirect('driver_dashboard')  
+        return render(request, 'home.html', {'error': "Invalid credentials or not a driver."})
+         
     return render(request, 'driver_login.html')
 
 def customer_login(request):
