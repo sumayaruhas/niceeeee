@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from multiselectfield import MultiSelectField
+import datetime
 
 
 
@@ -63,7 +64,7 @@ class Vehicle(models.Model):
         return self.name
     
 
-class CarReg(models.Model):
+class CarRegister(models.Model):
     DISTRICT_CHOICES = [
         ('Dhaka', 'Dhaka'),
         ('Chattogram', 'Chattogram'),
@@ -89,23 +90,106 @@ class CarReg(models.Model):
         ('Rangpur', 'Rangpur'),
         ('Mymensingh', 'Mymensingh'),
     ]
-    
+    GENDER_CHOICES = [
+        ('Male','Male'),
+        ('Female','Female'),
+    ]
 
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    phonenumber = models.IntegerField()
-    district = models.CharField(max_length=100, choices=DISTRICT_CHOICES)
-    country = models.CharField(max_length=100, choices=COUNTRY_CHOICES)
-    city = models.CharField(max_length=100, choices=CITY_CHOICES)
+    CAR_BRAND = [
+        
+        ('BMW','BMW'),
+        ('Cherry','Cherry'),
+        ('Daihatshu','Daihatsu'),
+        ('Ford','Ford'),
+        ('Honda','Honda'),
+        ('Hyundai','Hyundai'),
+        ('Kia','Kia'),
+        ('Maruti Suzuki','Maruti Suzuki'),
+        ('Mazda','Mazda'),
+        ('Mitsubishi','Mitsubishi'),
+        ('Nissan','Nissan'),
+        ('Proton','Proton'),
+        ('Subaru','Subaru'),
+        ('Tata','Tata'),
+        ('Toyota','Toyota'),
+    ]
+
+    CAR_MODEL = [
+        ('Accent','Accent'),
+        ('Accord','Accord'),
+        ('BMW X6','BMW'),
+        ('BMW X7','BMW X7'),
+        ('BMW 7 Series','BMW 7 Series'),
+        ('Civik','Civik'),
+        ('Corolla','Corolla'),
+        ('Fiesta','Fiesta'),
+        ('Elentra','Fiesta'),
+        ('Jazz','Jazz'),
+        ('Sonata','Fiesta'),
+
+
+    ]
+
+    REG_NO_CODE = [
+        ('DHK METRO','DHK METRO'),
+        ('CTG METEO','CTG METEO'),
+        ('SYL METRO','SYL METRO'),
+        ('KHL METRO','KHL METRO'),
+        ('RAJ METRO','RAJ METRO'),
+        ('BH','BH'),
+        ('BN','BN'),
+        ('CH','CH'),
+        ('CD','CD'),
+        ('CM','CM'),
+        ('DH','DH'),
+        ('DP','DP'),
+        ('FP','FP'),
+        ('GB','GB'),
+        ('JK','JK'),
+    ]
+
+    REG_NO_CATO=[
+        ('BHA','BHA'),
+        ('CHA','CHA'),
+        ('GA','GA'),
+        ('GHA','GHA'),
+        ('KA','KA'),
+        ('KHA','KHA'),
+        ('MA','MA'),
+        ('PA','PA'),
+        ('THA','THA'),
+    ]
+    
+    profilepic = models.ImageField(default="/static/website/images/profile.jpeg", upload_to='profilepic/', null=True, blank=True)
+    carpic = models.ImageField(default="/static/website/images/th.jpeg", upload_to='carpic/', null=True, blank=True)
+    firstname = models.CharField(max_length=100,default='')
+    lastname = models.CharField(max_length=100,default='')
+    district = models.CharField(max_length=100, default='')
+    country = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=100, default='')
     Transportation = models.BooleanField(default=False)
+    gender = models.CharField(max_length=100, default='')
+    brand = models.CharField(max_length=100, default='')
+    model = models.CharField(max_length=100, default='')
+    reg_area_code = models.CharField(max_length=100,default='')
+    reg_cat = models.CharField(max_length=100,default='9')
+    selected_date = models.DateField(default=datetime.date(1999, 10, 10))
+    phonenumber = models.CharField(max_length=15, default='')
+    license_no = models.CharField(max_length=20, default='')
+    reg_digits = models.CharField(max_length=10, default='')
+    nid = models.CharField(max_length=20,default='n/a')
+    email = models.EmailField(default='')
+    reg_no = models.CharField(max_length=100, blank=True, null=True)
+
 
     class Meta:
-        verbose_name = "Car Registration"
-        verbose_name_plural = "Car Registrations"
+        verbose_name = "Car Driver Registration"
+        verbose_name_plural = "Car Driver Registrations"
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['firstname', 'lastname', 'phonenumber']
 
     def __str__(self):
-        return f"{self.firstname} {self.lastname}"
-
+        return self.email
 
 User = get_user_model()
 
@@ -128,7 +212,7 @@ class DealStatus(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     deal = models.ForeignKey(Deal, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-
+                                           
     def __str__(self):
         return f"{self.user.username} - {self.deal.title} ({self.status})"
     

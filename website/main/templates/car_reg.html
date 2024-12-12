@@ -2,195 +2,348 @@
 {% load static %}
 {% block content %}
 
-  <div class="title" style="background-color: white;padding: 20px 0 30px 0;">
-    <h1>Earn with Your Car, Bike or Bicycle</h1>
-    <p>Do One or Multiple Services with your vehicle </p>
-  </div>
-  <div style="background-color: #faf0e8;display: flex;flex-direction: column; align-items: center;">
-    <div class="reg_section">
-      <div class="vehi_info">
-        <div class="type_vehi">
-          <a href="{% url 'car_registration' %}" class="thakna" style="color: black;"><div id="car_reg_icon" style="background-color: white;"><i class="fa-solid fa-car" style="color: #0074f8;"></i>
+<div class="title" style="background-color: white;padding: 20px 0 30px 0;">
+  <h1>Earn with Your Car, Bike or Bicycle</h1>
+  <p>Do One or Multiple Services with your vehicle </p>
+</div>
+<div style="background-color: #faf0e8;display: flex;flex-direction: column; align-items: center;">
+  <div class="reg_section">
+    <div class="vehi_info">
+      <div class="type_vehi">
+        <a href="{% url 'car_registration' %}" class="thakna" style="color: black;">
+          <div id="car_reg_icon" style="background-color: white;"><i class="fa-solid fa-car"
+              style="color: #0074f8;"></i>
             <p>Car</p>
-          </div></a>
-          <a href="{% url 'bike_registration' %}" class="thakna" style="color: black;"><div id="bike_reg_icon"><i class="fa-solid fa-motorcycle fa-fw"></i>
+          </div>
+        </a>
+        <a href="{% url 'bike_registration' %}" class="thakna" style="color: black;">
+          <div id="bike_reg_icon"><i class="fa-solid fa-motorcycle fa-fw"></i>
             <p>Bike</p>
-          </div></a>
-          <a href="{% url 'bicycle_registration' %}" class="thakna" style="color: black;"><div id="bicycle_reg_icon"><i class="fa-solid fa-bicycle"></i>
+          </div>
+        </a>
+        <a href="{% url 'bicycle_registration' %}" class="thakna" style="color: black;">
+          <div id="bicycle_reg_icon"><i class="fa-solid fa-bicycle"></i>
             <p>Bicycle</p>
-          </div></a>
-        </div>
-        <form method = "POST" enctype="multipart/form-data">
-          {% csrf_token %}
-        <div class="real-info" >
-          <p style="font-size: 30px;font-weight: 900;">REGISTER NOW</p>
-          <div class="urname">
-            <div id="fname">
-              <p>First Name</p>
-              <input placeholder="Enter your first name" name="firstname" required>
-            </div>
-            <div id="lname">
-              <p>Last Name</p>
-              <input placeholder="Enter your last name" name="lastname" required>
-            </div>
           </div>
-          <div class="loca">
-          <div id="pnumber">
-            <p>Enter your number</p>
-            <input placeholder="01XXXXXXXXX" name="phonenumber" required>
-          </div>
-          <div id="country" >
-            <p>Country</p>
-              <select name="country" required>
-                {% for country,label in countries%}
-                  <option value="{{ country }}">{{ country }}</option>
-                {% endfor %}
-              </select>
-          </div></div>
-          <div class="loca">
-            <div id="district">
-              <p>District</p >
-              <select name="district" required>
-                {% for district,label in districts%}
+        </a>
+      </div>
+      <form method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="real-info"
+          style="width:500px ;justify-self: center;background-color: #e9e9e9;margin-top: 40px;margin-bottom: 40px;border-radius: 5px;">
+          <p style="font-size: 30px;font-weight: 900;">01 Personal Information</p>
+          <div style="width:230 px;background-color: #ffffff;padding: 0 10px 10px 10px;border-radius: 5px;">
+            <div class="urname">
+              <div id="fname">
+                <p>First Name</p>
+                <input name="firstname" placeholder="Enter Your First Name">
+              </div>
+              <div id="lname">
+                <p>Last Name</p>
+                <input name="lastname" placeholder="Enter Your Last Name">
+              </div>
+            </div>
+            <div class="loca">
+              <div id="pnumber">
+                <p>Enter your number</p>
+                <input name="phonenumber" placeholder="01XXXXXXXXX">
+              </div>
+              <div id="country">
+                <p>Country</p>
+                <select name="country" required>
+                  {% for country,label in countries%}
+                  <option value="{{country}}">{{country}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="loca">
+              <div id="district">
+                <p>District</p>
+                <select name="district" required>
+                  {% for district,label in districts%}
                   <option value="{{ district }}">{{ district }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div id="city" >
-              <p>City</p>
-              <select name="city" required>
-                {% for city,label in cities%}
+                  {% endfor %}
+                </select>
+              </div>
+              <div id="city">
+                <p>City</p>
+                <select name="city" required>
+                  {% for city,label in cities%}
                   <option value="{{ city }}">{{ city }}</option>
-                {% endfor %}
-              </select>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="loca">
+              <div id="district">
+                <p>Gender</p>
+                <select name="gender" required>
+                  {% for gender,label in genders%}
+                  <option value="{{ gender }}">{{ gender }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div id="city">
+                <p>Date of Birth</p>
+                <input type="date" id="date" name="selected_date" value="{{ selected_date }}">
+              </div>
+            </div>
+            <div class="which_serv">
+              <p>Service(s) you want to provide</p>
+              <div class="checkbox-container">
+                <input type="checkbox" id="fruit1" name="Transporation" value="on">
+                <span class="custom-checkbox"></span>
+                <label for="fruit1">Transporation</label>
+              </div>
+            </div>
+            <div class="min_earn">
+              <p>You can earn up to</p>
+              <p style="color: rgb(0, 47, 255);font-weight: 550;">৳60000</p>
+            </div>
+            <div class="loca">
+              <div id="district">
+                <p>NID Number</p>
+                <input placeholder="Enter your NID number" name="nid">
+              </div>
+            </div>
+            <div>
+              <div id="city" style="display: flex;flex-direction: column;">
+                <p>Upload your photo</p>
+                <div style="display: flex;flex-direction: row;">
+                  <div class="preview" id="imagePreview">
+                    <img src="{% static 'website/images/profile.jpg' %}"
+                      style="height: 50px;width: 50px;margin-right: 20px;justify-self: center;" id="profileImage">
+                  </div>
+                  <input name='profilepic' type="file" id="imageInput" accept="image/png , image/jpg"
+                    style="padding-top: 10px;">
+                </div>
+              </div>
             </div>
           </div>
-          <div class="which_serv">
-            <p>Service(s) you want to provide</p>
-            <div class="checkbox-container">
-              <input type="checkbox" id="fruit1" name="Transporation" value="apple">
-              <span class="custom-checkbox"></span>
-              <label for="fruit1">Transporation</label>
+          <p style="font-size: 30px;font-weight: 900;">02 Vehical Information</p>
+          <div style="background-color: #ffffff;padding: 0 10px 10px 10px;border-radius: 5px;">
+            <div class="urname">
+              <div id="fname">
+                <p>Select Brand</p>
+                <select name="brand" required>
+                  {% for carbrand,label in carbrands %}
+                  <option value="{{ carbrand }}">{{ carbrand }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div id="lname">
+                <p>Select Model </p>
+                <select name="model" required>
+                  {% for code , label in carmodels %}
+                  <option value="{{ code }}">{{ code }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="reg_no" style="display: flex;flex-direction: column;">
+              <p>Registration Number</p>
+              <div style="display: flex;flex-direction: row;">
+                <div id="pnumber" style="margin-right: 60px;">
+                  <select name="reg_area_code" required style="width: 140%;">
+                    <p>Registration Number</p>
+                    {% for code,label in regareacode %}
+                    <option value="{{ code }}">{{ code }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div id="country" style="margin-right: 50px;">
+                  <select name="reg_cat" required style="width: 150%;">
+                    {% for country,label in regcatehory%}
+                    <option value="{{ country }}">{{ country }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <input name="reg_digits" placeholder="Digits" required style="height: 35px;width: 160px;" type="number">
+              </div>
+              <div id="lname">
+                <p>License Number</p>
+                <input name="license_no" placeholder="Digits" required name="license_no">
+              </div>
+              <div>
+                <div id="city" style="display: flex;flex-direction: column;">
+                  <p>Upload your Vehicle photo</p>
+                  <div style="display: flex;flex-direction: row;">
+                    <div class="preview" id="imagePreview2">
+                      <img src="{% static 'website/images/th.jpeg' %}"
+                        style="height: 50px;width: 50px;margin-right: 20px;justify-self: center;" id="profileImage2">
+                    </div>
+                    <input type="file" id="imageInput2" accept="image/png , image/jpg" style="padding-top: 10px;"
+                      name="carpic">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="min_earn">
-            <p>You can earn up to</p>
-            <p style="color: rgb(0, 47, 255);font-weight: 550;">৳60000</p>
+          <p style="font-size: 30px;font-weight: 900;">Sign In Info</p>
+          <div style="width:230 px;background-color: #ffffff;padding: 0 10px 10px 10px;border-radius: 5px;">
+            <div class="urname">
+              <div id="fname">
+                <p>Enter email: </p>
+                <input type="email" name="email" placeholder="Enter phone number or email" required>
+              </div>
+            </div>
+            <div class="reg_no" style="display: flex;flex-direction: column;">
+              <p>Enter Password: </p>
+              <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
           </div>
           <button class="nxt_info" type="submit">
             <p>Next Step</p><i class="fa-solid fa-right-long"></i>
           </button>
         </div>
-        </form>
-      </div>
-      <div class="fea-rule">
-        <div class="scroll">
-          <div class="why">
-            <h1 style="font-size: 40px;">Got a Car?</h1>
-            <p>These are the services you can be a part of!</p>
-          </div>
-          <div class="type_ser ser">
-            <img src="{% static 'website/images/icon-car.png' %}" style="height: 50px;">
-            <p class="ser_t">Transporation</p>
-          </div>
-          <div class="divider"></div>
-          <div class="why">
-            <h1>Why Join the SumTransit Family?</h1>
-            <p>Being wite SumTransit means being on the highest earning platform! So, what are you waiting for? Join us to
-              earn
-              the most!</p>
-          </div>
-          <div class="benefit" style="padding-left: 8px;padding-top: 60px;">
-            <img src="{% static 'website/images/icon-insured.png' %}" style="object-fit: contain;">
-            <div>
-              <h3>Your Ride is Insured</h3>
-              <p>SumTransit cares about your safety. And to keep you safe, SumTransit is giving you insurance coverage.
-              </p>
-            </div>
-          </div>
-          <div class="benefit">
-            <img src="{% static 'website/images/icon-bonus.png' %}" style="object-fit: contain;">
-            <div>
-              <h3>Earn More with Bonus</h3>
-              <p>With SumTransit's daily quests and attractive special offers, you can extra regularly.</p>
-            </div>
-          </div>
-          <div class="benefit" style="padding-left: 12px;">
-            <img src="{% static 'website/images/icon-time.png' %}" style="object-fit: contain;">
-            <div>
-              <h3>Get Your Payment on Time</h3>
-              <p>We SumTransit , you will never face a delay in payment. Get your payment in the shortest time!</p>
-            </div>
-          </div>
-          <div class="why" style="padding-top: 100px;">
-            <h1>Know if You’re Eligible to Join Us</h1>
-            <p>Not sure if you’re eligible to be a Captain? If you have the following, you can join us!</p>
-          </div>
-          <li>
-            <span class="num_i">
-              1
-            </span>
-            <div class="requ">
-              <h3>You must have an Android Phone</h3>
-              <p>With a smartphone, you can easily download and work with the SumTransit Drive app.</p>
-            </div>
-          </li>
-          <li>
-            <span class="num_i">
-              2
-            </span>
-            <div class="requ">
-              <h3>You must have your car’s registration paper</h3>
-              <p>You must have your car’s registration paper in order to become a part oe SumTransit.</p>
-            </div>
-          </li>
-          <li>
-            <span class="num_i">
-              3
-            </span>
-            <div class="requ">
-              <h3>You must have driving license</h3>
-              <p>To be a captain oe SumTransit, you must have a valid driver’s license.</p>
-            </div>
-          </li>
-          <li>
-            <span class="num_i">
-              4
-            </span>
-            <div class="requ">
-              <h3>You must have your car’s updated fitness paper</h3>
-              <p>To register your car wite SumTransit, you must have updated fitness paper for your car.</p>
-            </div>
-          </li>
-          <li>
-            <span class="num_i">
-              5
-            </span>
-            <div class="requ">
-              <h3>National ID/Passport</h3>
-              <p>In order to register as a rider, you either have an updated national ID or passport.</p>
-            </div>
-          </li>
-          <li>
-            <span class="num_i">
-              6
-            </span>
-            <div class="requ">
-              <h3>Tax Token</h3>
-              <p>To register wite SumTransit you must present your tax token.</p>
-            </div>
-          </li>
-          <li>
-            <span class="num_i">
-              7
-            </span>
-            <div class="requ">
-              <h3>Safety Coverage</h3>
-              <p>You should have the insurance papers with you at the time of registering wite SumTransit.</p>
-            </div>
-          </li>
+      </form>
+    </div>
+    <div class="fea-rule">
+      <div class="scroll">
+        <div class="why">
+          <h1 style="font-size: 40px;">Got a Car?</h1>
+          <p>These are the services you can be a part of!</p>
         </div>
+        <div class="type_ser ser">
+          <img src="{% static 'website/images/icon-car.png' %}" style="height: 50px;">
+          <p class="ser_t">Transporation</p>
+        </div>
+        <div class="divider"></div>
+        <div class="why">
+          <h1>Why Join the SumTransit Family?</h1>
+          <p>Being wite SumTransit means being on the highest earning platform! So, what are you waiting for? Join us to
+            earn
+            the most!</p>
+        </div>
+        <div class="benefit" style="padding-left: 8px;padding-top: 60px;">
+          <img src="{% static 'website/images/icon-insured.png' %}" style="object-fit: contain;">
+          <div>
+            <h3>Your Ride is Insured</h3>
+            <p>SumTransit cares about your safety. And to keep you safe, SumTransit is giving you insurance coverage.
+            </p>
+          </div>
+        </div>
+        <div class="benefit">
+          <img src="{% static 'website/images/icon-bonus.png' %}" style="object-fit: contain;">
+          <div>
+            <h3>Earn More with Bonus</h3>
+            <p>With SumTransit's daily quests and attractive special offers, you can extra regularly.</p>
+          </div>
+        </div>
+        <div class="benefit" style="padding-left: 12px;">
+          <img src="{% static 'website/images/icon-time.png' %}" style="object-fit: contain;">
+          <div>
+            <h3>Get Your Payment on Time</h3>
+            <p>We SumTransit , you will never face a delay in payment. Get your payment in the shortest time!</p>
+          </div>
+        </div>
+        <div class="why" style="padding-top: 100px;">
+          <h1>Know if You’re Eligible to Join Us</h1>
+          <p>Not sure if you’re eligible to be a Captain? If you have the following, you can join us!</p>
+        </div>
+        <li>
+          <span class="num_i">
+            1
+          </span>
+          <div class="requ">
+            <h3>You must have an Android Phone</h3>
+            <p>With a smartphone, you can easily download and work with the SumTransit Drive app.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num_i">
+            2
+          </span>
+          <div class="requ">
+            <h3>You must have your car’s registration paper</h3>
+            <p>You must have your car’s registration paper in order to become a part oe SumTransit.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num_i">
+            3
+          </span>
+          <div class="requ">
+            <h3>You must have driving license</h3>
+            <p>To be a captain oe SumTransit, you must have a valid driver’s license.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num_i">
+            4
+          </span>
+          <div class="requ">
+            <h3>You must have your car’s updated fitness paper</h3>
+            <p>To register your car wite SumTransit, you must have updated fitness paper for your car.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num_i">
+            5
+          </span>
+          <div class="requ">
+            <h3>National ID/Passport</h3>
+            <p>In order to register as a rider, you either have an updated national ID or passport.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num_i">
+            6
+          </span>
+          <div class="requ">
+            <h3>Tax Token</h3>
+            <p>To register wite SumTransit you must present your tax token.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num_i">
+            7
+          </span>
+          <div class="requ">
+            <h3>Safety Coverage</h3>
+            <p>You should have the insurance papers with you at the time of registering wite SumTransit.</p>
+          </div>
+        </li>
       </div>
     </div>
   </div>
-  {% endblock %}
+</div>
+<script>
+  let imageInput = document.getElementById('imageInput');
+  let profileImage = document.getElementById('profileImage');
+
+
+  imageInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      console.log("file")
+      reader.onload = function (event) {
+        profileImage.src = event.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+  let imageInput2 = document.getElementById('imageInput2');
+  let profileImage2 = document.getElementById('profileImage2');
+
+
+  imageInput2.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      console.log("file")
+      reader.onload = function (event) {
+        profileImage2.src = event.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+</script>
+{% endblock %}

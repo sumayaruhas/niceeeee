@@ -29,17 +29,30 @@ class CustomerProfileAdmin(admin.ModelAdmin):
         return obj.user.username  # Display only the username for user field
     user.admin_order_field = 'user'  # Allow ordering by user field
 
-@admin.register(CarReg)
+@admin.register(CarRegister)
 class CarRegAdmin(admin.ModelAdmin):
-    list_display = ('firstname', 'lastname', 'phonenumber', 'district', 'country', 'city', 'Transportation')
-    search_fields = ('firstname', 'lastname', 'phonenumber', 'district', 'country', 'city')
-    list_filter = ('Transportation',)
+    list_display = ['email','firstname', 'lastname' , 'phonenumber', 'gender', 'brand', 'model', 'license_no', 'nid', 'profilepic', 'carpic', 'selected_date']
+
+    search_fields = ['firstname', 'lastname', 'email', 'license_no', 'nid']
 
     fieldsets = (
-        (None, {
-             'fields': ('firstname', 'lastname', 'phonenumber', 'district', 'country', 'city', 'Transporation')
-         }),
-     )
+    (None, {
+        'fields': ('firstname', 'lastname', 'email', 'phonenumber', 'gender')
+    }),
+    ('Car Details', {
+        'fields': ('brand', 'model', 'reg_area_code', 'reg_cat', 'license_no', 'reg_digits', 'selected_date', 'carpic')
+    }),
+    ('Address Information', {
+        'fields': ('district', 'country', 'city')
+    }),
+    ('Profile Information', {
+        'fields': ('profilepic',)
+    }),
+    ('Other Info', {
+        'fields': ('nid', 'Transportation')
+    }),
+    )
+    list_filter = ['gender', 'Transportation', 'country', 'city']
 
 @admin.register(Deal)
 class DealAdmin(admin.ModelAdmin):

@@ -42,21 +42,45 @@ def suggest_login(request):
 def services(request):
     return render(request,'Services.html')
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from datetime import datetime
+ # Assuming CarReg is a custom model
+
 def car_reg(request):
-    countries = CarReg.COUNTRY_CHOICES
-    districts = CarReg.DISTRICT_CHOICES
-    cities = CarReg.CITY_CHOICES
-    if request.method == "POST":
-        data = request.POST
+    if request.method == 'POST':  
+        # Extract data from the form
+        email = request.POST.get('email')
+        password = request.POST.get('password')
         firstname = request.POST.get('firstname')
         lastname = request.POST.get('lastname')
         phonenumber = request.POST.get('phonenumber')
         district = request.POST.get('district')
         country = request.POST.get('country')
         city = request.POST.get('city')
-        transportation = request.POST.get('Transportation') == 'on'  
-        
-        new_entry = CarReg(
+        transportation = request.POST.get('Transportation') == 'on'
+        gender = request.POST.get('gender')
+        car_brand = request.POST.get('brand')
+        car_model = request.POST.get('model')
+        reg_area_code = request.POST.get('reg_area_code')
+        reg_category = request.POST.get('reg_cat')
+        reg_digits = request.POST.get('reg_digits')
+        profile_pic = request.FILES.get('profilepic')
+        car_pic = request.FILES.get('carpic')
+        nid = request.POST.get('nid', '')
+        license_no = request.POST.get('license_no')
+        selected_date = request.POST.get('selected_date')
+
+        # Convert selected date to date object
+        selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date() if selected_date else None
+
+        # Validate mandatory fields
+        if not email or not password or not firstname or not lastname or not phonenumber:
+            return render(request, 'car_reg.html', {'error': 'All fields are required!'})
+
+        # Create a CarReg instance
+        user = CarRegister.objects.create(
             firstname=firstname,
             lastname=lastname,
             phonenumber=phonenumber,
@@ -64,10 +88,43 @@ def car_reg(request):
             country=country,
             city=city,
             Transportation=transportation,
+            gender=gender,
+            brand=car_brand,
+            model=car_model,
+            reg_area_code=reg_area_code,
+            reg_cat=reg_category,
+            reg_digits=reg_digits,
+            profilepic=profile_pic,
+            carpic=car_pic,
+            nid=nid,
+            email=email,
+            license_no=license_no,
+            selected_date=selected_date,
         )
-        new_entry.save()
-        return redirect ('/registration/car/')
-    return render(request, 'car_reg.html',{'countries':countries, 'districts':districts,'cities': cities})
+        
+        user.reg_no = f"{reg_area_code}{reg_category}{reg_digits}"
+        print(firstname, lastname, email, phonenumber, nid)
+        # Authenticate and log in the user
+        django_user = authenticate(request, username=email, password=password)
+        if django_user:
+            login(request, django_user)
+            user.save()
+            return redirect('home') 
+        
+        return render(request, 'car_reg.html', {'error': 'Authentication failed. Please check your credentials.'})
+
+    # Preload dropdown choices
+    params = {
+        'countries': CarRegister.COUNTRY_CHOICES,
+        'districts': CarRegister.DISTRICT_CHOICES,
+        'cities': CarRegister.CITY_CHOICES,
+        'genders': CarRegister.GENDER_CHOICES,
+        'carbrands': CarRegister.CAR_BRAND,
+        'carmodels': CarRegister.CAR_MODEL,
+        'regareacode': CarRegister.REG_NO_CODE,
+        'regcatehory': CarRegister.REG_NO_CATO,
+    }
+    return render(request, 'car_reg.html', params)
 
 def bike_reg(request):
     return render(request,'bike_reg.html')
