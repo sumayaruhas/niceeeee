@@ -50,9 +50,14 @@ from django.shortcuts import render, redirect
 from datetime import datetime
 
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import make_password
+from datetime import datetime
+
 def car_reg(request):
     if request.method == 'POST':  
-        
         email = request.POST.get('email')
         password = request.POST.get('password')
         firstname = request.POST.get('firstname')
@@ -61,7 +66,7 @@ def car_reg(request):
         district = request.POST.get('district')
         country = request.POST.get('country')
         city = request.POST.get('city')
-        transportation = request.POST.get('Transportation')=='on'
+        transportation = request.POST.get('Transportation') == 'on'
         gender = request.POST.get('gender')
         car_brand = request.POST.get('brand')
         car_model = request.POST.get('model')
@@ -74,14 +79,21 @@ def car_reg(request):
         license_no = request.POST.get('license_no')
         selected_date = request.POST.get('selected_date')
 
-        hashed_password=make_password(password)
+        # Hash the password
+        hashed_password = make_password(password)
         
+        # Parse the selected date
         selected_date = datetime.strptime(selected_date, '%Y-%m-%d').date() if selected_date else None
 
         if not email or not password or not firstname or not lastname or not phonenumber:
             return render(request, 'car_reg.html', {'error': 'All fields are required!'})
 
-        user = CarRegister.objects.create(
+        # Create the User instance first
+        user = CustomUser.objects.create_user(username=email, email=email, password=password,user_type = "Driver")
+        
+        # Create the CarRegister instance
+        driver = CarRegister.objects.create(
+            user=user,  # Associate the CarRegister with the User
             firstname=firstname,
             lastname=lastname,
             phonenumber=phonenumber,
@@ -104,13 +116,13 @@ def car_reg(request):
             password=hashed_password,
         )
         
-        user.reg_no = f"{reg_area_code}{reg_category}{reg_digits}"
-        print(firstname, lastname, email, phonenumber, nid)
-        # Authenticate and log in the user
+        driver.reg_no = f"{reg_area_code}{reg_category}{reg_digits}"
+        driver.save()
+
+        # Authenticate the user and log them in
         django_user = authenticate(request, username=email, password=password)
         if django_user:
             login(request, django_user)
-            user.save()
             return redirect('home') 
         return render(request, 'car_reg.html', {'error': 'Authentication failed. Please check your credentials.'})
 
@@ -152,17 +164,32 @@ def customer_sign_up(request):
 def driver_sign_up(request):
     return render(request, 'car_reg.html')
 
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.utils.timezone import now
+from .models import CarRegister
+
 def driver_login(request):
     if request.method == 'POST':
         email = request.POST.get('username')
         password = request.POST.get('password')
-        existing_user = CarRegister.objects.filter(email=email).first()
-        if existing_user and check_password(password, existing_user.password):
-            request.session['user_id'] = existing_user.id
-            existing_user.last_login = timezone.now()
-            existing_user.save()
-            return redirect('driver_dashboard')  
-        return render(request, 'home.html', {'error': "Invalid credentials or not a driver."})
+        user = authenticate(request, username=email, password=password)
+        if user:
+            # Check if the user is a registered driver
+            driver = CarRegister.objects.filter(email=email).first()
+            if driver and check_password(password, driver.password):
+                # Log the user in
+                login(request, user)
+                
+                # Access the authenticated user
+                Rider = CarRegister.objects.get(user=request.user)
+                driver.last_login = now()
+                driver.save()
+                
+                # Redirect to driver dashboard
+                return redirect('driver_dashboard')
+            return render(request, 'driver_login.html', {'error': "Invalid credentials.You are not a driver."})
+        return render(request, 'driver_login.html', {'error': "Invalid credentials."})
     return render(request, 'driver_login.html')
 
 def customer_login(request):

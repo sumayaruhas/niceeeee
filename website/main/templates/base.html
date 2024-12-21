@@ -27,25 +27,13 @@
       <div class="lang"><i class="fa-solid fa-globe"></i>
         <p>EN<i class="fa-solid fa-caret-down" style="margin-left: 10px;"></i>
       </div>
+
       {% if user.is_authenticated %}
       <!-- If the user is logged in, show the Logout option -->
-      {% if user.driver %}
-      <a href="{% url 'driver_dashboard' %}" class="thakna" style="color: hsl(0, 0%, 100%);">
-        <div>
-          <i class="fa-regular fa-user"></i>
-        </div>
-      </a>
-      {% endif %}
-      {% if user.Customer %}
-      <a href="{% url 'customer_dashboard' %}" class="thakna" style="color: hsl(0, 0%, 100%);">
-        <div>
-          <i class="fa-regular fa-user"></i>
-        </div>
-      </a>
-      {% endif %}
       <a href="{% url 'logout' %}" class="thakna" style="color: hsl(0, 0%, 100%);">
         <div class="log_in_nav">
           <p>Logout</p>
+          <div><img src=""></div>
         </div>
       </a>
       {% else %}

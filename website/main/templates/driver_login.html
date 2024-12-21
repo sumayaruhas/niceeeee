@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="justtoalign">
+    <div class="justtoalign" style="display: flex;flex-direction: column;align-items: center;">
+        {% if error %}
+    <div class="error" >{{ error }}</div>
+{% endif %}
+
         <div class="containersu" style="margin-top:20px;">
             <div class="logo">
                 <h1>SumTransit</h1>
@@ -34,4 +38,12 @@
             </p>
         </div>
     </div>
+    <style>.error{
+        background-color: #f3ce68;
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        font-weight: 600;
+        margin-top: 10px;
+    }</style>
 {% endblock %}

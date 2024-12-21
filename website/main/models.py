@@ -9,7 +9,6 @@ from multiselectfield import MultiSelectField
 import datetime
 
 
-
 class CustomUser(AbstractUser):
     USER_TYPE_CHOICES = (
         ('driver', 'Driver'),
@@ -64,7 +63,12 @@ class Vehicle(models.Model):
         return self.name
     
 
+from django.conf import settings
+from django.db import models
+import datetime
+
 class CarRegister(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     DISTRICT_CHOICES = [
         ('Dhaka', 'Dhaka'),
         ('Chattogram', 'Chattogram'),
@@ -188,6 +192,17 @@ class CarRegister(models.Model):
         verbose_name_plural = "Car Driver Registrations"
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['firstname', 'lastname', 'phonenumber']
+    class Meta:
+        verbose_name = "Car Driver Registration"
+        verbose_name_plural = "Car Driver Registrations"
+
+    def __str__(self):
+        return f"{self.firstname} {self.lastname} ({self.user.email})"
+
+    def save(self, *args, **kwargs):
+        if not self.reg_no:
+            self.reg_no = f"{self.reg_area_code}{self.reg_cat}{self.reg_digits}"
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.email
