@@ -28,7 +28,9 @@ urlpatterns = [
     path('deal/<int:deal_id>/claim/', views.click_deal, name='click_deal'),
     path('booking-page/', views.booking_page, name='booking_page'),
     path('booking-form/', views.booking_form, name='booking_form'),
-    path('testdashboard/', views.testdashboard, name='testdashboard'), 
+    path('testdashboard/', views.testdashboard, name='testdashboard'),
+    path('Driver/Car/Booking/', views.confirm_car_booking, name='confirm_car_booking'),
+    path('booking/<int:booking_id>/accept/', views.accept_booking, name='accept_booking'), 
     ]
 
 if settings.DEBUG:

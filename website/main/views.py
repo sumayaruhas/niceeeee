@@ -2,16 +2,29 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .forms import CustomerSignUpForm, DriverSignUpForm
-from .models import HelpRequest
 from .models import *
-from django.contrib import messages
 from django.shortcuts import get_object_or_404
-from .models import Deal, DealStatus
 from django.urls import reverse
-from .forms import BookingForm
+from .forms import *
 from django.contrib.auth.hashers import *
 from django.utils import timezone 
+from django.utils.timezone import now
+from django.contrib.auth.models import User
+from datetime import datetime
+from django.contrib.auth.hashers import make_password
+
+def accept_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.status = "approved"
+    booking.save()
+
+    return redirect('driver_dashboard') 
+
+def confirm_car_booking(request):
+
+    user_booking = Booking.objects.filter(status='pending')
+
+    return render(request, 'confirm_car_booking.html',{'pendings': user_booking})
 
 def help_request_view(request):
     if request.method == 'POST':
@@ -44,17 +57,6 @@ def suggest_login(request):
 def services(request):
     return render(request,'Services.html')
 
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from datetime import datetime
-
-
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.contrib.auth.hashers import make_password
-from datetime import datetime
 
 def car_reg(request):
     if request.method == 'POST':  
@@ -164,11 +166,6 @@ def customer_sign_up(request):
 def driver_sign_up(request):
     return render(request, 'car_reg.html')
 
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.utils.timezone import now
-from .models import CarRegister
-
 def driver_login(request):
     if request.method == 'POST':
         email = request.POST.get('username')
@@ -186,11 +183,11 @@ def driver_login(request):
                 driver.last_login = now()
                 driver.save()
                 
-                # Redirect to driver dashboard
                 return redirect('driver_dashboard')
             return render(request, 'driver_login.html', {'error': "Invalid credentials.You are not a driver."})
         return render(request, 'driver_login.html', {'error': "Invalid credentials."})
     return render(request, 'driver_login.html')
+
 
 def customer_login(request):
     if request.method == 'POST':
@@ -237,9 +234,7 @@ def booking_page(request):
         return redirect(reverse('booking_form'))
 
     return render(request, 'booking_page.html')
-from .models import Booking
-from django.contrib import messages
-from django.shortcuts import redirect, render
+
 
 def booking_form(request):
     if request.method == 'POST':
