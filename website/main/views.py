@@ -279,3 +279,8 @@ def testdashboard(request):
     user_bookings = Booking.objects.all()  # Filter based on user if you have user accounts
 
     return render(request, 'testdashboard.html', {'bookings': user_bookings})
+
+
+def car_registration_details(request):
+    cars = CarRegister.objects.all()
+    return render(request, 'car_registration_details.html', {'cars': cars})

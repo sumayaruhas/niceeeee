@@ -29,6 +29,8 @@ urlpatterns = [
     path('booking-page/', views.booking_page, name='booking_page'),
     path('booking-form/', views.booking_form, name='booking_form'),
     path('testdashboard/', views.testdashboard, name='testdashboard'), 
+    path('car-registration-details/', views.car_registration_details, name='car_registration_details'),
+
     ]
 
 if settings.DEBUG:
