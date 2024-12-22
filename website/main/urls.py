@@ -30,6 +30,7 @@ urlpatterns = [
     path('booking-form/', views.booking_form, name='booking_form'),
     path('testdashboard/', views.testdashboard, name='testdashboard'), 
     path('car-registration-details/', views.car_registration_details, name='car_registration_details'),
+    path('update-driver-profile/', views.update_driver_profile, name='update_driver_profile'),
 
     ]
 
