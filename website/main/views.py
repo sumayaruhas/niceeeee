@@ -252,6 +252,8 @@ def customer_dashboard(request):
     deal_statuses = DealStatus.objects.filter(user=request.user)
     return render(request, 'customer_dashboard.html', {'deal_statuses': deal_statuses})
 
+
+@login_required
 def booking_page(request):
     if request.method == 'POST':
         pickup_location = request.POST.get('pickup_location')
