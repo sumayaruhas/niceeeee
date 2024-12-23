@@ -12,10 +12,10 @@
                 <h2>Driver Login<h2>
             </div>
             <div class="login-box" style="margin-top: 20px;">
-                <h2>Enter your e-mail and password</h2>
+                <h2>Enter your username and password</h2>
                 <form method="POST" action="{% url 'driver_login' %}">
                     {% csrf_token %}
-                    <input type="text" name="username" placeholder="Enter phone number or email" required>
+                    <input type="text" name="username" placeholder="Enter your username" required>
                     <input type="password" name="password" placeholder="Enter your password" required>
                     <button type="submit" class="btn">Continue</button>
                 </form>

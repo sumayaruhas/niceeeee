@@ -80,6 +80,7 @@ def car_reg(request):
         nid = request.POST.get('nid', '')
         license_no = request.POST.get('license_no')
         selected_date = request.POST.get('selected_date')
+        username = request.POST.get('username')
 
         # Hash the password
         hashed_password = make_password(password)
@@ -91,7 +92,7 @@ def car_reg(request):
             return render(request, 'car_reg.html', {'error': 'All fields are required!'})
 
         # Create the User instance first
-        user = CustomUser.objects.create_user(username=email, email=email, password=password,user_type = "Driver")
+        user = CustomUser.objects.create_user(username=username, email=email, password=password,user_type = "Driver")
         
         # Create the CarRegister instance
         driver = CarRegister.objects.create(
@@ -122,7 +123,7 @@ def car_reg(request):
         driver.save()
 
         # Authenticate the user and log them in
-        django_user = authenticate(request, username=email, password=password)
+        django_user = authenticate(request, username=username, password=password)
         if django_user:
             login(request, django_user)
             return redirect('home') 
@@ -164,16 +165,16 @@ def customer_sign_up(request):
     return render(request, 'customer_sign_up.html', {'form': form, 'user_type': 'Customer'})
 
 def driver_sign_up(request):
-    return render(request, 'car_reg.html')
+    return render(request, 'customer_sign_up.html')
 
 def driver_login(request):
     if request.method == 'POST':
-        email = request.POST.get('username')
+        username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username=email, password=password)
+        user = authenticate(request, username=username, password=password)
         if user:
             # Check if the user is a registered driver
-            driver = CarRegister.objects.filter(email=email).first()
+            driver = CarRegister.objects.filter(email=user.email).first()
             if driver and check_password(password, driver.password):
                 # Log the user in
                 login(request, user)
