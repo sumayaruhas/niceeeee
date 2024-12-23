@@ -266,8 +266,13 @@ def booking_page(request):
         return redirect(reverse('booking_form'))
 
     return render(request, 'booking_page.html')
+
 @login_required
 def booking_form(request):
+    first_name = request.user.firstname
+    last_name = request.user.lastname
+    name = f"{first_name} {last_name}"
+
     pickup_date = None
     pickup_time = None
     dropoff_date = None
@@ -278,7 +283,7 @@ def booking_form(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
+            # name = request.session.get('firstname '+ 'lastname')
             phone_number = form.cleaned_data['phone_number']
             pickup_date = form.cleaned_data['pickup_date']
             pickup_time = form.cleaned_data['pickup_time']
@@ -309,6 +314,7 @@ def booking_form(request):
     # Ensure a response is returned
     return render(request, 'booking_form.html', {
         'form': form,
+        'name': name,
         'pickup_location': pickup_location,
         'pickup_date': pickup_date,
         'pickup_time': pickup_time,

@@ -55,7 +55,7 @@ class DealForm(forms.ModelForm):
 import datetime
 
 class BookingForm(forms.Form):
-    name = forms.CharField(max_length=100, required=True)
+    # name = forms.CharField(max_length=100, required=True)
     phone_number = forms.CharField(max_length=15, required=True)
     pickup_date = forms.DateField(widget=forms.SelectDateWidget, required=True)
     pickup_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'), required=True)
