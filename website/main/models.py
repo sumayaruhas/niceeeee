@@ -255,10 +255,13 @@ class Booking(models.Model):
     ]
 
     name = models.CharField(max_length=100)
-    age = models.IntegerField()
     phone_number = models.CharField(max_length=15)
     pickup_location = models.CharField(max_length=255)
+    pickup_date = models.DateField(default=datetime.date(1999, 10, 10))
+    pickup_time = models.TimeField(default=datetime.time(0, 0))
     dropoff_location = models.CharField(max_length=255)
+    dropoff_date = models.DateField(default=datetime.date(1999, 10, 10))
+    dropoff_time = models.TimeField(default=datetime.time(0, 0))
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
 
     def __str__(self):

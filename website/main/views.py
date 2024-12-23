@@ -266,39 +266,55 @@ def booking_page(request):
         return redirect(reverse('booking_form'))
 
     return render(request, 'booking_page.html')
-
-
+@login_required
 def booking_form(request):
+    pickup_date = None
+    pickup_time = None
+    dropoff_date = None
+    dropoff_time = None
+    pickup_location = request.session.get('pickup_location', '')
+    dropoff_location = request.session.get('dropoff_location', '')
+
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-            age = form.cleaned_data['age']
             phone_number = form.cleaned_data['phone_number']
-            pickup_location = request.session.get('pickup_location', '')
-            dropoff_location = request.session.get('dropoff_location', '')
+            pickup_date = form.cleaned_data['pickup_date']
+            pickup_time = form.cleaned_data['pickup_time']
+            dropoff_date = form.cleaned_data['dropoff_date']
+            dropoff_time = form.cleaned_data['dropoff_time']
 
             # Save booking to the database
             Booking.objects.create(
                 name=name,
-                age=age,
                 phone_number=phone_number,
                 pickup_location=pickup_location,
-                dropoff_location=dropoff_location
+                pickup_date=pickup_date,
+                pickup_time=pickup_time,
+                dropoff_location=dropoff_location,
+                dropoff_date=dropoff_date,
+                dropoff_time=dropoff_time,
             )
 
             messages.success(request, 'Booking submitted successfully!')
-            return redirect('testdashboard')
+            return redirect('testdashboard')  # Redirect after success
+        else:
+            # Handle invalid form
+            messages.error(request, 'Please correct the errors below.')
 
     else:
-        pickup_location = request.session.get('pickup_location', '')
-        dropoff_location = request.session.get('dropoff_location', '')
         form = BookingForm()
-    
+
+    # Ensure a response is returned
     return render(request, 'booking_form.html', {
         'form': form,
         'pickup_location': pickup_location,
+        'pickup_date': pickup_date,
+        'pickup_time': pickup_time,
         'dropoff_location': dropoff_location,
+        'dropoff_date': dropoff_date,
+        'dropoff_time': dropoff_time,
     })
     
 def testdashboard(request):

@@ -73,7 +73,7 @@ class DealStatusAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('name', 'pickup_location', 'dropoff_location', 'status')
+    list_display = ('name', 'pickup_location', 'pickup_date', 'pickup_time', 'dropoff_location', 'dropoff_date', 'dropoff_time', 'status')
     list_filter = ('status',)
     actions = ['approve_bookings']
 
