@@ -68,7 +68,7 @@ from django.db import models
 import datetime
 
 class CarRegister(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     DISTRICT_CHOICES = [
         ('Dhaka', 'Dhaka'),
         ('Chattogram', 'Chattogram'),
@@ -83,7 +83,6 @@ class CarRegister(models.Model):
     COUNTRY_CHOICES = [
         ('Bangladesh', 'Bangladesh'),
     ]
-
     CITY_CHOICES = [
         ('Dhaka', 'Dhaka'),
         ('Chattogram', 'Chattogram'),
@@ -98,7 +97,6 @@ class CarRegister(models.Model):
         ('Male','Male'),
         ('Female','Female'),
     ]
-
     CAR_BRAND = [
         
         ('BMW','BMW'),
@@ -117,7 +115,6 @@ class CarRegister(models.Model):
         ('Tata','Tata'),
         ('Toyota','Toyota'),
     ]
-
     CAR_MODEL = [
         ('Accent','Accent'),
         ('Accord','Accord'),
@@ -133,7 +130,6 @@ class CarRegister(models.Model):
 
 
     ]
-
     REG_NO_CODE = [
         ('DHK METRO','DHK METRO'),
         ('CTG METEO','CTG METEO'),
@@ -151,7 +147,6 @@ class CarRegister(models.Model):
         ('GB','GB'),
         ('JK','JK'),
     ]
-
     REG_NO_CATO=[
         ('BHA','BHA'),
         ('CHA','CHA'),
@@ -164,8 +159,8 @@ class CarRegister(models.Model):
         ('THA','THA'),
     ]
     
-    profilepic = models.ImageField(default="/media/profile.jpeg", upload_to='profilepic/', null=True, blank=True)
-    carpic = models.ImageField(default="/media/th.jpeg", upload_to='carpic/', null=True, blank=True)
+    profilepic = models.ImageField( upload_to='profilepic/', null=True, blank=True)
+    carpic = models.ImageField( upload_to='carpic/', null=True, blank=True)
     firstname = models.CharField(max_length=100,default='')
     lastname = models.CharField(max_length=100,default='')
     district = models.CharField(max_length=100, default='')

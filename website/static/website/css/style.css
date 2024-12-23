@@ -1250,3 +1250,11 @@ margin: 0 20px;
 .claimd :hover{
     cursor: pointer;
 }
+.profile_pic_das  {
+    height: 50px;
+    width: 50px; 
+    border-radius: 50px; 
+    border: #f7f7f7 1px solid;
+    object-fit: cover; 
+    margin-right: 15px;
+}

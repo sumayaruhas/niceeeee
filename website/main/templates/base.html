@@ -30,12 +30,19 @@
 
       {% if user.is_authenticated %}
       <!-- If the user is logged in, show the Logout option -->
+
+
       <a href="{% url 'logout' %}" class="thakna" style="color: hsl(0, 0%, 100%);">
-        <div class="log_in_nav">
+        <div class="log_in_nav "
+          style="display: flex;align-items: center;align-self: center;height: fit-content;margin-right: 10px;">
           <p>Logout</p>
-          <div><img src=""></div>
         </div>
       </a>
+      {% if profile_pic %}
+      <img class="profile_pic_das" src="{{profile_pic}}" style="object-fit: contain;">
+      {% endif %}
+
+
       {% else %}
       <a href="{% url 'loginsuggest' %}" class="thakna" style="color: hsl(0, 0%, 100%);">
         <div class="log_in_nav" href="{% url 'suggest_page' %}">
@@ -50,9 +57,11 @@
       {% endif %}
     </div>
     </div>
+
     <div class="Navbar-2"
       style="display:flex; align-items:center; background-color:rgba(45, 45, 95, 0.876); color:aliceblue;">
       <i class="fa-solid fa-bars" style="margin-left:40px; margin-right:20px;font-size: 30px;"></i>
+      {% if user.is_authenticated and user.user_type == 'Driver' %}
       <a href="{% url 'home' %}" class="thakna">
         <div class="sub_nav">
           <i class="fa-solid fa-house"></i>
@@ -60,22 +69,48 @@
         </div>
       </a>
       <a href="{% url 'services' %}" class="thakna">
-      <div class="Navbar-2-vitor sub_nav " style="display:flex; align-items:center;">
-        <i class="fa-solid fa-taxi" style="color: #f7f7f7;"></i>
-        <p>Services</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
-      </div></a>
-      <a href="{% url 'car_registration' %}" class="thakna">
-      <div class="sub_nav"><i class="fa-regular fa-address-card" style="color: #ffffff;"></i>
-        <p>Employment</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
-      </div></a>
+        <div class="Navbar-2-vitor sub_nav " style="display:flex; align-items:center;">
+          <i class="fa-solid fa-taxi" style="color: #f7f7f7;"></i>
+          <p>Services</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        </div>
+      </a>
+      <a href="{% url 'confirm_car_booking' %}" class="thakna">
+        <div class="sub_nav"><i class="fa-regular fa-address-card" style="color: #ffffff;"></i>
+          <p>Ride Bookings</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        </div>
+      </a>
       <a href="{% url 'deals' %}" class="thakna">
-      <div class="sub_nav"><i class="fa-brands fa-shopify" style="color: #ffffff;"></i>
-        <p>Deals</p>
-      </div></a>
+        <div class="sub_nav"><i class="fa-brands fa-shopify" style="color: #ffffff;"></i>
+          <p>Commission</p>
+        </div>
+      {% else %}
+      <a href="{% url 'home' %}" class="thakna">
+        <div class="sub_nav">
+          <i class="fa-solid fa-house"></i>
+          <p>Home</p>
+        </div>
+      </a>
+      <a href="{% url 'services' %}" class="thakna">
+        <div class="Navbar-2-vitor sub_nav " style="display:flex; align-items:center;">
+          <i class="fa-solid fa-taxi" style="color: #f7f7f7;"></i>
+          <p>Services</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        </div>
+      </a>
+      <a href="{% url 'car_registration' %}" class="thakna">
+        <div class="sub_nav"><i class="fa-regular fa-address-card" style="color: #ffffff;"></i>
+          <p>Employment</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        </div>
+      </a>
+      <a href="{% url 'deals' %}" class="thakna">
+        <div class="sub_nav"><i class="fa-brands fa-shopify" style="color: #ffffff;"></i>
+          <p>Deals</p>
+        </div>
+        {% endif %}
+      </a>
       <a href="{% url 'help' %}" class="thakna">
         <div class="sub_nav"><i class="fa-solid fa-info" style="color: #ffffff;"></i>
-        <p>Help</p>
-      </div>
+          <p>Help</p>
+        </div>
       </a>
       <div class="sub_nav"><i class="fa-brands fa-blogger" style="color: #ffffff;"></i>
         <p>Vlog</p>
