@@ -20,14 +20,21 @@ class DriverProfileAdmin(admin.ModelAdmin):
         queryset = super().get_queryset(request)
         return queryset.filter(user__user_type='driver')
 
-@admin.register(CustomerProfile)
+@admin.register(RiderRegister)
 class CustomerProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'phone_number', 'address')
+    list_display = ['email','firstname', 'lastname' , 'phonenumber', 'gender', 'profilepic']
 
-    # Optionally customize how 'user' is displayed if needed
-    def user(self, obj):
-        return obj.user.username  # Display only the username for user field
-    user.admin_order_field = 'user'  # Allow ordering by user field
+    search_fields = ['firstname', 'lastname', 'email']
+
+    fieldsets = (
+    (None, {
+        'fields': ('firstname', 'lastname', 'email', 'phonenumber', 'gender')
+    }),
+    ('Profile Information', {
+        'fields': ('profilepic',)
+    }),
+    )
+    list_filter = ['gender']  # Allow ordering by user field
 
 @admin.register(CarRegister)
 class CarRegAdmin(admin.ModelAdmin):

@@ -1,49 +1,51 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="justtoalign" style="display: flex;flex-direction: column;align-items: center;">
-        {% if error %}
-    <div class="error" >{{ error }}</div>
-{% endif %}
+<div class="justtoalign" style="display: flex;flex-direction: column;align-items: center;">
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
 
-        <div class="containersu" style="margin-top:20px;">
-            <div class="logo">
-                <h1>SumTransit</h1>
-                <h2>Driver Login<h2>
-            </div>
-            <div class="login-box" style="margin-top: 20px;">
-                <h2>Enter your username and password</h2>
-                <form method="POST" action="{% url 'driver_login' %}">
-                    {% csrf_token %}
-                    <input type="text" name="username" placeholder="Enter your username" required>
-                    <input type="password" name="password" placeholder="Enter your password" required>
-                    <button type="submit" class="btn">Continue</button>
-                </form>
-                <div class="divider"><span>or</span></div>
-
-                <button class="btn google-btn">
-                    <i class="fa-brands fa-apple" style="margin-right:5px; font-size:20px"></i>Continue with Google
-                </button>
-                <button class="btn apple-btn">
-                    <i class="fa-brands fa-google" style="margin-right:5px;"></i>Continue with Apple
-                </button>
-                <div class="divider"><span>or</span></div>
-                <button class="btn qr-btn">
-                    <i class="fa-solid fa-qrcode" style="margin-right:5px;"></i> Log in with QR code
-                </button>
-            </div>
-            <p class="terms">
-                By proceeding, you consent to get calls, WhatsApp or SMS/RCS messages, including by automated means,
-                from Uber and its affiliates to the number provided.
-            </p>
+    <div class="containersu" style="margin-top:20px;">
+        <div class="logo">
+            <h1>SumTransit</h1>
+            <h2>Driver Login<h2>
         </div>
+        <div class="login-box" style="margin-top: 20px;">
+            <h2>Enter your username and password</h2>
+            <form method="POST" action="{% url 'driver_login' %}">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Enter your username" required>
+                <input type="password" name="password" placeholder="Enter your password" required>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <div class="divider"><span>or</span></div>
+
+            <button class="btn google-btn">
+                <i class="fa-brands fa-apple" style="margin-right:5px; font-size:20px"></i>Continue with Google
+            </button>
+            <button class="btn apple-btn">
+                <i class="fa-brands fa-google" style="margin-right:5px;"></i>Continue with Apple
+            </button>
+            <div class="divider"><span>or</span></div>
+            <button class="btn qr-btn">
+                <i class="fa-solid fa-qrcode" style="margin-right:5px;"></i> Log in with QR code
+            </button>
+        </div>
+        <p class="terms">
+            By proceeding, you consent to get calls, WhatsApp or SMS/RCS messages, including by automated means,
+            from Uber and its affiliates to the number provided.
+        </p>
     </div>
-    <style>.error{
+</div>
+<style>
+    .error {
         background-color: #f3ce68;
         width: fit-content;
         height: fit-content;
         padding: 10px;
         font-weight: 600;
         margin-top: 10px;
-    }</style>
+    }
+</style>
 {% endblock %}

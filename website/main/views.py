@@ -126,7 +126,7 @@ def car_reg(request):
         django_user = authenticate(request, username=username, password=password)
         if django_user:
             login(request, django_user)
-            return redirect('home') 
+            return redirect('driver_dashboard') 
         return render(request, 'car_reg.html', {'error': 'Authentication failed. Please check your credentials.'})
 
     params = {
@@ -155,14 +155,36 @@ def driver_dashboard(request):
 
 def customer_sign_up(request):
     if request.method == 'POST':
-        form = CustomerSignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('customer_dashboard')
-    else:
-        form = CustomerSignUpForm()
-    return render(request, 'customer_sign_up.html', {'form': form, 'user_type': 'Customer'})
+        email = request.POST.get('email')
+        password = request.POST.get('password1')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        phonenumber = request.POST.get('phonenumber')
+        username = request.POST.get('username')
+        password2 = request.POST.get('password2')
+        gender = request.POST.get('gender')
+
+        if password2==password:
+            hashed_password = make_password(password)
+            user = CustomUser.objects.create_user(username=username, email=email, password=password,user_type = "Customer")
+            
+            customer = RiderRegister.objects.create(
+            user=user,  # Associate the CarRegister with the User
+            firstname=firstname,
+            lastname=lastname,
+            phonenumber=phonenumber,
+            gender=gender,
+            email=email,
+            password=hashed_password,
+            )
+            django_user = authenticate(request, username=username, password=password)
+            if django_user:
+                login(request, django_user)
+                return redirect('customer_dashboard') 
+            return render(request, 'customer_sign_up.html', {'error': 'Authentication failed. Please check your credentials.'})
+
+        return render(request, 'customer_sign_up.html', {'error': "Both the passwords aren't same!",'genders': RiderRegister.GENDER_CHOICES})
+    return render(request, 'customer_sign_up.html',{'genders': RiderRegister.GENDER_CHOICES,})
 
 def driver_sign_up(request):
     return render(request, 'customer_sign_up.html')
@@ -195,11 +217,18 @@ def customer_login(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        if user is not None and user.user_type == 'customer':
-            login(request, user)
-            return redirect('customer_dashboard')  # Redirect to customer dashboard
-        else:
-            messages.error(request, "Invalid credentials or not a customer.")
+        if user:
+            rider = RiderRegister.objects.filter(email=user.email).first()
+            if rider and check_password(password, rider.password):
+                # Log the user in
+                login(request, user)
+                rider = RiderRegister.objects.get(user=request.user)
+                rider.last_login = now()
+                rider.save()
+                
+                return redirect('customer_dashboard')
+            return render(request, 'customer_login.html', {'error': "Invalid credentials.You are not a Rider."})
+        return render(request, 'customer_login.html', {'error': "Invalid credentials."})
     return render(request, 'customer_login.html')
   
 def logout_view(request):

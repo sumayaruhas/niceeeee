@@ -67,6 +67,29 @@ from django.conf import settings
 from django.db import models
 import datetime
 
+class RiderRegister(models.Model):
+    GENDER_CHOICES = [
+        ('Male','Male'),
+        ('Female','Female'),
+    ]
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    firstname = models.CharField(max_length=100,default='')
+    lastname = models.CharField(max_length=100,default='')
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICES,null=True, blank=True)
+    email = models.EmailField(default='')
+    phonenumber = models.CharField(max_length=15, default='')
+    password = models.CharField(max_length=255)
+    profilepic = models.ImageField( upload_to='profilepic/', null=True, blank=True)
+    class Meta:
+        verbose_name = "Rider Registration"
+        verbose_name_plural = "Riders Registrations"
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['firstname', 'lastname', 'phonenumber']
+    
+    def __str__(self):
+        return f"{self.firstname} {self.lastname} ({self.user.email})"
+
+
 class CarRegister(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     DISTRICT_CHOICES = [
@@ -187,10 +210,7 @@ class CarRegister(models.Model):
         verbose_name_plural = "Car Driver Registrations"
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['firstname', 'lastname', 'phonenumber']
-    class Meta:
-        verbose_name = "Car Driver Registration"
-        verbose_name_plural = "Car Driver Registrations"
-
+    
     def __str__(self):
         return f"{self.firstname} {self.lastname} ({self.user.email})"
 

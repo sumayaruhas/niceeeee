@@ -8,8 +8,8 @@ def profile_pic(request):
             
             rider = CarRegister.objects.get(user=request.user)
             
-            return {'profile_pic': rider.profilepic.url if rider.profilepic else 'media/profilepic/profile.jpg'}
+            return {'profile_pic': rider.profilepic.url if rider.profilepic else 'profilepic/profile.jpg'}
         except CarRegister.DoesNotExist:
             
-            return {'profile_pic': 'media/profilepic/profile.jpg'}
+            return {'profile_pic': 'profilepic/profile.jpg'}
     return {'profile_pic': None}
