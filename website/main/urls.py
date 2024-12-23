@@ -31,6 +31,10 @@ urlpatterns = [
     path('testdashboard/', views.testdashboard, name='testdashboard'),
     path('Driver/Car/Booking/', views.confirm_car_booking, name='confirm_car_booking'),
     path('booking/<int:booking_id>/accept/', views.accept_booking, name='accept_booking'), 
+    path('testdashboard/', views.testdashboard, name='testdashboard'), 
+    path('car-registration-details/', views.car_registration_details, name='car_registration_details'),
+    path('update-driver-profile/', views.update_driver_profile, name='update_driver_profile'),
+
     ]
 
 if settings.DEBUG:

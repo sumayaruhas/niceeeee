@@ -275,3 +275,36 @@ def testdashboard(request):
     user_bookings = Booking.objects.all()  # Filter based on user if you have user accounts
 
     return render(request, 'testdashboard.html', {'bookings': user_bookings})
+
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import CarRegister
+
+@login_required
+def car_registration_details(request):
+    cars = CarRegister.objects.filter(user=request.user)
+    return render(request, 'car_registration_details.html', {'cars': cars})
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import ProfileUpdateForm
+from .models import CarRegister
+
+@login_required
+def update_driver_profile(request):
+    try:
+        profile = CarRegister.objects.get(user=request.user)
+    except CarRegister.DoesNotExist:
+        profile = None
+
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('car_registration_details')  # Redirect to a page of your choice
+    else:
+        form = ProfileUpdateForm(instance=profile)
+
+    return render(request, 'update_driver_profile.html', {'form': form})
+

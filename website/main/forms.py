@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
+from .models import CarRegister
+
 
 class CustomerSignUpForm(UserCreationForm):
     class Meta:
@@ -56,4 +58,19 @@ class BookingForm(forms.Form):
     phone_number = forms.CharField(max_length=15, required=True)
 
 
-
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CarRegister
+        fields = [
+            'firstname', 'lastname', 'phonenumber', 'gender', 
+            'district', 'country', 'city', 'profilepic', 'carpic',
+            'brand', 'model', 'reg_area_code', 'reg_cat', 'reg_digits',
+            'license_no', 'nid', 'email'
+        ]
+        widgets = {
+            'gender': forms.Select(choices=CarRegister.GENDER_CHOICES),
+            'brand': forms.Select(choices=CarRegister.CAR_BRAND),
+            'model': forms.Select(choices=CarRegister.CAR_MODEL),
+            'reg_area_code': forms.Select(choices=CarRegister.REG_NO_CODE),
+            'reg_cat': forms.Select(choices=CarRegister.REG_NO_CATO),
+        }

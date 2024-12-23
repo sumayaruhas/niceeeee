@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Registration Details</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Car Registration Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Registration No.</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Profile Picture</th>
+                <th>Car Picture</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.firstname }} {{ car.lastname }}</td>
+                <td>{{ car.brand }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.reg_no }}</td>
+                <td>{{ car.phonenumber }}</td>
+                <td>{{ car.email }}</td>
+                <td>
+                    <img src="{{ car.profilepic.url }}" alt="Profile Pic" style="width:50px;height:50px;">
+                </td>
+                <td>
+                    <img src="{{ car.carpic.url }}" alt="Car Pic" style="width:50px;height:50px;">
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No car registrations found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
