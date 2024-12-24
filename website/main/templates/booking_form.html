@@ -1,5 +1,7 @@
 <form method="POST">
     {% csrf_token %}
+    <p>Name: {{ name }}</p>
+    <p>Phone Number: {{ phone_number }}</p>
     {{ form.as_p }}
     <p>Pickup: {{ pickup_location }}</p>
     <p>Dropoff: {{ dropoff_location }}</p>

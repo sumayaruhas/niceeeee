@@ -269,10 +269,10 @@ def booking_page(request):
 
 @login_required
 def booking_form(request):
-    first_name = request.user.firstname
-    last_name = request.user.lastname
+    first_name = RiderRegister.objects.get(user=request.user).firstname
+    last_name = RiderRegister.objects.get(user=request.user).lastname
     name = f"{first_name} {last_name}"
-
+    phone_number = RiderRegister.objects.get(user=request.user).phonenumber
     pickup_date = None
     pickup_time = None
     dropoff_date = None
@@ -283,8 +283,6 @@ def booking_form(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            # name = request.session.get('firstname '+ 'lastname')
-            phone_number = form.cleaned_data['phone_number']
             pickup_date = form.cleaned_data['pickup_date']
             pickup_time = form.cleaned_data['pickup_time']
             dropoff_date = form.cleaned_data['dropoff_date']
@@ -293,7 +291,7 @@ def booking_form(request):
             # Save booking to the database
             Booking.objects.create(
                 name=name,
-                phone_number=phone_number,
+                phone_number = phone_number,
                 pickup_location=pickup_location,
                 pickup_date=pickup_date,
                 pickup_time=pickup_time,
@@ -321,6 +319,7 @@ def booking_form(request):
         'dropoff_location': dropoff_location,
         'dropoff_date': dropoff_date,
         'dropoff_time': dropoff_time,
+        'phone_number' : phone_number
     })
     
 def testdashboard(request):
