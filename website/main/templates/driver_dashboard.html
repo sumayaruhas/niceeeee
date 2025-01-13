@@ -8,7 +8,7 @@
       <h2>Your Rides</h2>
       <ul>
         <li><a href="#">View Current Rides</a></li>
-        <li><a href="#">Completed Rides</a></li>
+        <a href="{% url 'completed_rides' %}">View Completed Rides</a>
         <li><a href="#">Earnings Summary</a></li>
       </ul>
     </div>
@@ -35,7 +35,7 @@
   }
 
   .dashboard-options {
-    display: flex;
+
     gap: 20px;
   }
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Rides</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Completed Rides</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Phone Number</th>
+                <th>Pickup Location</th>
+                <th>Dropoff Location</th>
+                <th>Pickup Date</th>
+                <th>Pickup Time</th>
+                <th>Dropoff Date</th>
+                <th>Dropoff Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in completed %}
+                <tr>
+                    <td>{{ booking.name }}</td>
+                    <td>{{ booking.phone_number }}</td>
+                    <td>{{ booking.pickup_location }}</td>
+                    <td>{{ booking.dropoff_location }}</td>
+                    <td>{{ booking.pickup_date }}</td>
+                    <td>{{ booking.pickup_time }}</td>
+                    <td>{{ booking.dropoff_date }}</td>
+                    <td>{{ booking.dropoff_time }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="8">No completed rides available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'driver_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>

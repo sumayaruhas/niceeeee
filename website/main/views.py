@@ -386,3 +386,9 @@ def view_driver(request, booking_id):
     driver = CarRegister.objects.get(email=booking.driverid)
     
     return render(request, 'view_driver.html', {'booking': booking, 'driver': driver})
+
+def completed_car_booking(request):
+    car_register = CarRegister.objects.get(user=request.user)
+    completed_bookings = Booking.objects.filter(status="completed", driverid=car_register.id)
+
+    return render(request, 'completed_rides.html', {'completed': completed_bookings})

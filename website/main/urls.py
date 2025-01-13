@@ -36,6 +36,8 @@ urlpatterns = [
     path('car-registration-details/', views.car_registration_details, name='car_registration_details'),
     path('update-driver-profile/', views.update_driver_profile, name='update_driver_profile'),
     path('Driver/Car/Pending/', views.pending_car_booking, name='pending_car_booking'),
+        path('completed_rides/', views.completed_car_booking, name='completed_rides'),
+
     ]
 
 if settings.DEBUG:
