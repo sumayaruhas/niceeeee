@@ -13,12 +13,29 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.contrib.auth.hashers import make_password
 
+def complete_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    booking.status = "completed"
+    booking.save()
+    
+    return redirect('driver_dashboard')
+
+
+def pending_car_booking(request):
+    car_register = CarRegister.objects.get(user=request.user)
+    user_booking = Booking.objects.filter(status="approved" ,driverid=car_register.id)
+
+    return render(request, 'pending_rides.html',{'pendings': user_booking})
+
 def accept_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
+    driver = CarRegister.objects.get(user=request.user)
+    booking.driverid = driver
     booking.status = "approved"
     booking.save()
+    
+    return redirect('driver_dashboard')
 
-    return redirect('driver_dashboard') 
 
 def confirm_car_booking(request):
 
@@ -288,9 +305,11 @@ def booking_form(request):
             pickup_time = form.cleaned_data['pickup_time']
             dropoff_date = form.cleaned_data['dropoff_date']
             dropoff_time = form.cleaned_data['dropoff_time']
+            user=RiderRegister.objects.get(user=request.user)
 
             # Save booking to the database
             Booking.objects.create(
+                customerid=user,
                 name=name,
                 phone_number=phone_number,
                 pickup_location=pickup_location,
@@ -320,7 +339,7 @@ def booking_form(request):
         'dropoff_location': dropoff_location,
         'dropoff_date': dropoff_date,
         'dropoff_time': dropoff_time,
-        phone_number : phone_number
+        'phone_number' : phone_number,
     })
     
 def testdashboard(request):

@@ -238,6 +238,7 @@ class DealStatus(models.Model):
         ('pending', 'Pending'),
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
+        ('completed','Completed'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -253,7 +254,8 @@ class Booking(models.Model):
         ('approved', 'Approved'),
         ('rejected', 'Rejected'),
     ]
-
+    customerid = models.ForeignKey('RiderRegister', on_delete=models.CASCADE, related_name='customer_bookings',null=True, blank=True)
+    driverid = models.ForeignKey('CarRegister', on_delete=models.CASCADE, null=True, blank=True, related_name='driver_bookings')
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
     pickup_location = models.CharField(max_length=255)
