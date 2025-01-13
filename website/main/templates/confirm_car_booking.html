@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %} 
+{% block content %}
 
 <div style="align-items: center;display: flex;flex-direction: column;">
     <h1 class="dealsheader">Booking Section</h1>
@@ -8,17 +8,42 @@
         {% for pending in pendings %}
         <li>
             <div class="dealsbox">
-                <h3 class="dealstitle">{{ pending.name }}</h3>
-                <p class="dealsdes"><b>Phone Number: </b>{{ pending.phone_number }}</p>
-                <p class="dealsdes"><b>Pickup Location: </b>{{ pending.pickup_location }}</p>
-                <p class="dealsdes"><b>Dropoff Location: </b>{{ pending.dropoff_location }}</p>
+                <div style="display: flex;justify-content: center;align-items: center;">
+                    {% if pending.customer_prof %}
+                    <div style="margin-right: 20px;">
+                        <img src="{{ booking.customer_prof.url }}" alt="Driver Profile" style="width: 100px;height: 100px;object-fit: cover;border-radius: 50px; 
+      border: #f7f7f7 1px solid; ">
+                        {% else %}
+                        <img src="{% static 'website/images/profile.jpg' %}" alt="Default Profile"
+                            style="width: 100px;height: 100px;">
+                        {% endif %}
+                    </div>
+
+                    <div style="display: flex;flex-direction: column;width: 60%;" class="dealsdes">
+                        <p><b>Name: </b>{{ pending.name }}</p>
+                        <p><b>Phone: </b>{{ pending.phone_number }}</p>
+                    </div>
+                <div class="dealsdes" style="display: flex;flex-direction: column;">
+                    <p><b>Pickup Location: </b>{{ pending.pickup_location }}</p>
+                    <p><b>Dropoff Location: </b>{{ pending.dropoff_location }}</p>
+                    <p><b>Pickup: </b>{{ pending.pickup_date }} {{ pending.pickup_time }}</p>
+                    <p><b>Dropoff: </b>{{ pending.dropoff_date }} {{ pending.dropoff_time }}</p>
+                </div>
                 <a href="{% url 'accept_booking' pending.id %}" class="thakna">
-                    <div class="claimd"><p> Accept <p></div>
+                    <div class="claimd">
+                        <p> Accept
+                        <p>
+                    </div>
                 </a>
             </div>
         </li>
         {% endfor %}
     </ul>
-</div>
-
+</div><style>
+.dealsdes p{
+    font-size: 20px;
+      }
+    </style>
 {% endblock %}
+
+

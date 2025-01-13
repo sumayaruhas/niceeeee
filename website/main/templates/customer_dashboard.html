@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="dashboard-container">
-  <h1>Welcome, Customer!</h1>
-  <div class="dashboard-options">
+<div class="big_div">
+  <div class="left_div">
     <div class="dashboard-section">
       <h2>Your Orders</h2>
       <ul>
@@ -19,7 +18,7 @@
         <li><a href="#">Saved Addresses</a></li>
         <li><a href="#">Payment Methods</a></li>
       </ul>
-      
+
     </div>
     <div class="dashboard-section">
       <h2>Support</h2>
@@ -28,28 +27,146 @@
         <li><a href="#">FAQs</a></li>
       </ul>
     </div>
-</div>
+  </div>
 
-{% block dashboard_content %}
-<h1>Your Dashboard</h1>
-<h2>Claimed Deals</h2>
-<ul>
-    {% for deal_status in deal_statuses %}
-    <li>
-        <h3>{{ deal_status.deal.title }}</h3>
-        {% if deal_status.deal.image %}
-            <img src="{{ deal_status.deal.image.url }}" alt="{{ deal_status.deal.title }}" width="300">
+
+  <div class="main_part">
+    <h1>Welcome, Customer!</h1>
+    <div class="profile">
+      <div class="picture">
+        {% if rider.profilepic %}
+        <div style="margin-right: 20px;">
+          <img src="{{ rider.profilepic.url }}" alt="Driver Profile">
+        </div>
+        {% else %}
+        <div style="margin-right: 20px;">
+          <img src="{% static 'website/images/profile.jpg' %}" alt="Default Profile">
+        </div>
         {% endif %}
-        <p>Status: {{ deal_status.status }}</p>
-    </li>
-    {% endfor %}
-</ul>
-{% endblock %}
+      </div>
+      <div class="proinfo">
+        <p><b>Name: </b> {{rider.firstname}} {{rider.lastname}}</p>
+        <p><b>Phone: </b> {{rider.phonenumber}}</p>
+        <p><b>Email: </b> {{rider.email}}</p>
+        <p><b>Gender: </b> {{rider.gender}}</p>
+      </div>
+    </div>
+    <button id="yellow"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
+  </div>
 
+
+
+  <div class="right_div">
+
+    {% block dashboard_content %}
+    <h2 style="color: #9e3636;font-size: 30px;">Claimed Deals</h2>
+    <ul>
+      {% for deal_status in deal_statuses %}
+      <li>
+        <div class="dealsbo">
+          <h3 class="dealstitl">{{ deal_status.deal.title }}</h3>
+          <p class="dealsde">{{ deal_status.deal.description }}</p>
+          {% if deal_status.deal.image %}
+          <div class="dealim">
+            <img src="{{ deal_status.deal.image.url }}" alt="{{ deal_status.deal.title }}" width="300">
+          </div>
+          {% endif %}
+          <p>Status: {{ deal_status.status }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endblock %}
   </div>
 </div>
 
+
+
+
 <style>
+  #yellow{
+    margin: 20px 0 0 30px;
+    padding: 15px;
+    background-color: rgb(24, 88, 88);
+    color: #ffffff;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+  .proinfo p{
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+  }
+  .profile{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .picture img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 50px;
+    border: black 2px solid;
+  }
+
+  .dealsbo {
+    width: 90%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffe6e6;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dealstitl {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+
+  .dealsde {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    width: 300px;
+  }
+
+  .dealim img {
+    max-width: 200px;
+    border-radius: 5px;
+  }
+
+  .right_div {
+    padding: 20px 10px;
+    width: 350px;
+    flex: 1;
+    background-color: #ffc3c3;
+  }
+
+  .main_part {
+    flex: 3.5;
+    padding: 20px 20px;
+  }
+
+  .big_div {
+    width: 100%;
+    display: flex;
+  }
+
+  .left_div {
+    flex: 1;
+    background-color: rgb(37, 37, 37);
+    color: #ffffff;
+    padding-top: 50px;
+  }
+
   .dashboard-container {
     padding: 20px;
   }
@@ -60,8 +177,6 @@
   }
 
   .dashboard-section {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
     border-radius: 8px;
     padding: 15px;
     flex: 1;
@@ -82,11 +197,13 @@
 
   .dashboard-section ul li a {
     text-decoration: none;
-    color: #0056b3;
+    color: #b1b1b1;
   }
 
   .dashboard-section ul li a:hover {
     text-decoration: underline;
   }
 </style>
+
+
 {% endblock %}

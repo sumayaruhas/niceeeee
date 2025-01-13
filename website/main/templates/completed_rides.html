@@ -1,68 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Completed Rides</title>
-    {% load static %}
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-        }
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
-</head>
-<body>
-    <h1>Completed Rides</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Customer Name</th>
-                <th>Phone Number</th>
-                <th>Pickup Location</th>
-                <th>Dropoff Location</th>
-                <th>Pickup Date</th>
-                <th>Pickup Time</th>
-                <th>Dropoff Date</th>
-                <th>Dropoff Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for booking in completed %}
-                <tr>
-                    <td>{{ booking.name }}</td>
-                    <td>{{ booking.phone_number }}</td>
-                    <td>{{ booking.pickup_location }}</td>
-                    <td>{{ booking.dropoff_location }}</td>
-                    <td>{{ booking.pickup_date }}</td>
-                    <td>{{ booking.pickup_time }}</td>
-                    <td>{{ booking.dropoff_date }}</td>
-                    <td>{{ booking.dropoff_time }}</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="8">No completed rides available.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'driver_dashboard' %}">Back to Dashboard</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="align-items: center;display: flex;flex-direction: column;">
+    <h1 class="dealsheader">Rides Completed</h1>
+    <ul>
+        {% for complete in completed %}
+        <li>
+            <div class="dealsbox">
+                <div style="display: flex;justify-content: center;align-items: center;">
+                    {% if complete.customer_prof %}
+                    <div style="margin-right: 20px;">
+                        <img src="{{ booking.customer_prof.url }}" alt="Driver Profile" style="width: 100px;height: 100px;object-fit: cover;border-radius: 50px; 
+      border: #f7f7f7 1px solid; ">
+                        {% else %}
+                        <img src="{% static 'website/images/profile.jpg' %}" alt="Default Profile"
+                            style="width: 100px;height: 100px;">
+                        {% endif %}
+                    </div>
+
+                    <div style="display: flex;flex-direction: column;width: 60%;" class="dealsdes">
+                        <p><b>Name: </b>{{ complete.name }}</p>
+                        <p><b>Phone: </b>{{ complete.phone_number }}</p>
+                    </div>
+                <div class="dealsdes" style="display: flex;flex-direction: column;">
+                    <p><b>Pickup Location: </b>{{ complete.pickup_location }}</p>
+                    <p><b>Dropoff Location: </b>{{ complete.dropoff_location }}</p>
+                    <p><b>Pickup: </b>{{ complete.pickup_date }} {{ complete.pickup_time }}</p>
+                    <p><b>Dropoff: </b>{{ complete.dropoff_date }} {{ complete.dropoff_time }}</p>
+                </div>
+                <div class="dealsdes">
+                    <p> Completed
+                    <p>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<style>
+    .dealsdes p{
+        font-size: 20px;
+          }
+        </style>
+{% endblock %}
+

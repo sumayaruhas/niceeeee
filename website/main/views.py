@@ -170,7 +170,10 @@ def help(request):
     return render(request,'help.html')
 
 def driver_dashboard(request):
-    return render(request, 'driver_dashboard.html')
+    driver = CarRegister.objects.get(user=request.user)
+    count_pending = Booking.objects.filter(status="Approved" ,driverid=driver.id).count()
+    count_completed = Booking.objects.filter(status="Completed" ,driverid=driver.id).count()
+    return render(request, 'driver_dashboard.html',{'driver':driver,'count_pending':count_pending,'count_completed':count_completed})
 
 def customer_sign_up(request):
     if request.method == 'POST':
@@ -268,8 +271,9 @@ def click_deal(request, deal_id):
 
 @login_required
 def customer_dashboard(request):
+    Rider = RiderRegister.objects.get(user=request.user)
     deal_statuses = DealStatus.objects.filter(user=request.user)
-    return render(request, 'customer_dashboard.html', {'deal_statuses': deal_statuses})
+    return render(request, 'customer_dashboard.html', {'deal_statuses': deal_statuses,'rider':Rider})
 
 
 @login_required
@@ -347,7 +351,7 @@ def booking_form(request):
     
 def testdashboard(request):
     rider = RiderRegister.objects.get(user=request.user)
-    user_bookings = Booking.objects.filter(customerid=rider.id)
+    user_bookings = Booking.objects.filter(customerid=rider.id).order_by('-id')
     return render(request, 'testdashboard.html', {'bookings': user_bookings })
 
 from django.shortcuts import render
@@ -389,6 +393,6 @@ def view_driver(request, booking_id):
 
 def completed_car_booking(request):
     car_register = CarRegister.objects.get(user=request.user)
-    completed_bookings = Booking.objects.filter(driverid=car_register.id).exclude(status="pending")
+    completed_bookings = Booking.objects.filter(status="Completed" ,driverid=car_register.id).order_by('-id')
 
     return render(request, 'completed_rides.html', {'completed': completed_bookings})

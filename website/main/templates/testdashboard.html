@@ -3,23 +3,24 @@
 {% block content %}
 
 <div style="align-items: center;display: flex;flex-direction: column;">
-  <h1 class="dealsheader">Booking Section</h1>
+  <h1 class="dealsheader">My Bookings</h1>
   <ul>
     {% for booking in bookings %}
     <li>
       <div class="dealsbox">
-        <p class="dealsdes"><b>Pickup Location: </b>{{ booking.pickup_location }}</p>
-        <p class="dealsdes"><b>Dropoff Location: </b>{{ booking.dropoff_location }}</p>
-        <p class="dealsdes"><b>Pickup: </b>{{ booking.pickup_date }} {{ booking.pickup_time }}</p>
-        <p class="dealsdes"><b>Dropoff: </b>{{ booking.dropoff_date }} {{ booking.dropoff_time }}</p>
-        <p class="dealsdes"><b>Status: </b>{{booking.status}}</p>
+        <div class="dealsdes" style="display: flex;flex-direction: column;">
+        <p ><b>Pickup Location: </b>{{ booking.pickup_location }}</p>
+        <p ><b>Dropoff Location: </b>{{ booking.dropoff_location }}</p>
+        <p ><b>Pickup: </b>{{ booking.pickup_date }} {{ booking.pickup_time }}</p>
+        <p ><b>Dropoff: </b>{{ booking.dropoff_date }} {{ booking.dropoff_time }}</p>
+        <p ><b>Status: </b>{{booking.status}}</p></div>
         {% if not booking.status == "Pending" %}
 
         <h3 class="dealstitle">Accepted By:</h3>
         <div style="display: flex;justify-content: center;align-items: center;">
           {% if booking.driver_prof %}
           <div style="margin-right: 20px;">
-            <img src="{{ booking.driver_prof.url }}" alt="Driver Profile" style="width: 150px;height: 150px;object-fit: cover;border-radius: 50px; 
+            <img src="{{ booking.driver_prof.url }}" alt="Driver Profile" style="width: 100px;height: 100px;object-fit: cover;border-radius: 50px; 
     border: #f7f7f7 1px solid; ">
             {% else %}
             <img src="{% static 'images/profilepic/profile.jpg' %}" alt="Default Profile"
@@ -27,9 +28,9 @@
             {% endif %}
           </div>
 
-          <div style="display: flex;flex-direction: column;width: 80%;">
-            <p class="dealsdes"><b>Name: </b>{{ booking.driver_name }}</p>
-            <p class="dealsdes"><b>Phone: </b>{{ booking.driver_phone_number }}</p>
+          <div style="display: flex;flex-direction: column;width: 90%;" class="dealsdes">
+            <p><b>Name: </b>{{ booking.driver_name }}</p>
+            <p><b>Phone: </b>{{ booking.driver_phone_number }}</p>
           </div>
         </div>{% endif %}
       </div>
@@ -42,4 +43,9 @@
 {% if not bookings %}
 <p>No bookings yet!</p>
 {% endif %}
+<style>
+  .dealsdes p{
+font-size: 20px;
+  }
+</style>
 {% endblock %}

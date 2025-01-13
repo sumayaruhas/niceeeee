@@ -9,13 +9,13 @@ def profile_pic(request):
         try:
             if request.user.user_type == 'Driver':
                 driver = CarRegister.objects.get(user=request.user)
-                profile_pic = driver.profilepic.url if driver.profilepic else 'profilepic/profile.jpg'
+                profile_pic = driver.profilepic.url if driver.profilepic else 'website/images/profile.jpg'
             elif request.user.user_type == 'Customer':
                 customer = RiderRegister.objects.get(user=request.user)
-                profile_pic = customer.profilepic.url if customer.profilepic else 'profilepic/profile.jpg'
+                profile_pic = customer.profilepic.url if customer.profilepic else 'website/images/profile.jpg'
         except (CarRegister.DoesNotExist, RiderRegister.DoesNotExist):
-            profile_pic = 'profilepic/profile.jpg' # Default profile picture
+            profile_pic = 'website/images/profile.jpg' # Default profile picture
 
         return {'profile_pic': profile_pic}
 
-    return {'profile_pic': 'profilepic/profile.jpg'}
+    return {'profile_pic': 'website/images/profile.jpg'}

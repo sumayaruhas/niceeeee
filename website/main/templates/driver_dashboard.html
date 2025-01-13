@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="dashboard-container">
-  <h1>Welcome, Driver!</h1>
-  <div class="dashboard-options">
+<div class="big_div">
+  <div class="left_div">
     <div class="dashboard-section">
       <h2>Your Rides</h2>
       <ul>
 
-        <a href="{% url 'completed_rides' %}">View Completed Rides</a>
+        <a href="{% url 'completed_rides' %}" style="color: #b1b1b1;">View Completed Rides</a>
         <li><a href="#">Earnings Summary</a></li>
       </ul>
     </div>
@@ -27,27 +26,153 @@
       </ul>
     </div>
   </div>
+
+
+  <div class="main_part">
+    <h1>Welcome, Driver!</h1>
+    <h1 style="margin-top: 40px;">Driver Info:</h1>
+    <div class="profile">
+      <div class="picture">
+        {% if driver.profilepic %}
+        <div style="margin-right: 20px;">
+          <img src="{{ driver.profilepic.url }}" alt="Driver Profile">
+        </div>
+        {% else %}
+        <div style="margin-right: 20px;">
+          <img src="{% static 'website/images/profile.jpg' %}" alt="Default Profile">
+        </div>
+        {% endif %}
+      </div>
+      <div class="proinfo">
+        <p><b>Name: </b> {{driver.firstname}} {{driver.lastname}}</p>
+        <p><b>Phone: </b> {{driver.phonenumber}}</p>
+        <p><b>Email: </b> {{driver.email}}</p>
+        <p><b>Gender: </b> {{driver.gender}}</p>
+        <p><b>NID: </b> {{driver.nid}}</p>
+        <p><b>Date of Birth: </b> {{driver.selected_date	}}</p>
+      </div>
+    </div>
+    <h1 style="margin-top: 40px;">Vehical Info:</h1>
+    <div class="profile">
+      <div class="picture">
+        {% if driver.carpic %}
+        <div style="margin-right: 20px;">
+          <img src="{{ driver.carpic.url }}" alt="Driver Profile">
+        </div>
+        {% else %}
+        <div style="margin-right: 20px;">
+          <img src="{% static 'website/images/th.jpg' %}" alt="Default Car Image">
+        </div>
+        {% endif %}
+      </div>
+      <div class="proinfo">
+        <p><b>District: </b> {{driver.district}} </p>
+        <p><b>Car Model: </b> {{driver.brand}} {{driver.model}}</p>
+        <p><b>Registration Number: </b> {{driver.reg_area_code}} {{driver.reg_cat}} {{driver.reg_digits}}</p>
+        <p><b>License No.: </b> {{driver.license_no}}</p>
+      </div>
+    </div>
+    <a href="{% url 'update_driver_profile' %}"><button id="yellow"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button></a>
+  </div>
+
+
+
+  <div class="right_div">
+      <div class="info-box">
+        <i1>{{count_completed}}</i1>
+        <i2>Rides Completed</i2>
+      </div>
+
+      <div class="info-box">
+        <i1>{{count_pending}}</i1>
+        <i2>Rides Pending</i2>
+      </div>
+    </div>
+  </div>
 </div>
 
+
+
+
 <style>
+  .info-box{
+    background-color: #ffc3c3;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  #yellow {
+    margin: 20px 0 0 30px;
+    padding: 15px;
+    background-color: rgb(24, 88, 88);
+    color: #ffffff;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+
+  .proinfo p {
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+  }
+
+  .profile {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .picture img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 50px;
+    border: black 2px solid;
+  }
+
+
+  .right_div {
+    padding: 20px 10px;
+    width: 350px;
+    flex: 1;
+    background-color: #ffdfdf;
+    display: flex;
+    flex-direction:column;
+  }
+
+  .main_part {
+    flex: 3.5;
+    padding: 20px 20px;
+  }
+
+  .big_div {
+    width: 100%;
+    display: flex;
+  }
+
+  .left_div {
+    flex: 1;
+    background-color: rgb(37, 37, 37);
+    color: #ffffff;
+    padding-top: 50px;
+  }
+
   .dashboard-container {
     padding: 20px;
   }
 
   .dashboard-options {
-margin-bottom:10px;
-margin-top:10px;
+    display: flex;
     gap: 20px;
   }
 
   .dashboard-section {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     flex: 1;
-    margin-bottom:10px;
-margin-top:10px;
   }
 
   .dashboard-section h2 {
@@ -65,11 +190,13 @@ margin-top:10px;
 
   .dashboard-section ul li a {
     text-decoration: none;
-    color: #007bff;
+    color: #b1b1b1;
   }
 
   .dashboard-section ul li a:hover {
     text-decoration: underline;
   }
 </style>
+
+
 {% endblock %}
