@@ -18,48 +18,51 @@
         </div>
         <form method="POST" action="{% url 'booking_page' %}">
             {% csrf_token %}
-        <div class="loc">
-            <div class="from"><input placeholder="Pickup Location">
-                <i class="fa-solid fa-location-dot" style="font-size: 25px;"></i>
+            <div class="loc">
+                <div class="from">
+                    <input name="pickup_location" placeholder="Pickup Location" required>
+                    <i class="fa-solid fa-location-dot" style="font-size: 25px;"></i>
+                </div>
+                <div class="to">
+                    <input name="dropoff_location" placeholder="Dropoff Location" required>
+                </div>
             </div>
-            <div class="to"> <input placeholder="Dropoff Location"></div>
-        </div>
-        <div class="parcel hide">
-            <div class="Tracking"> <input placeholder="Enter Tracking ID"></div>
-        </div>
-        <div class="fly hide">
-            <div class="depart">
-                <i class="fa-solid fa-plane-departure"></i>
-                <select style="width: 70%;margin-bottom: 10px">
-                    <option>--Departing Country--</option>
-                    <option>Bangladesh</option>
-                </select>
-                <select>
-                    <option>--Departing Airport--</option>
-                    <option>Dhaka,Hazrat Shahjalal International Airport</option>
-                    <option>Chattogram, Shah Amanat International Airport</option>
-                    <option>Barisal, Barishal Airport</option>
-                    <option>Jashore, Jashore Airport</option>
-                    <option>Cox's Bazar, Cox's Bazar Airport</option>
-                </select>
+            <div class="parcel hide">
+                <div class="Tracking"> <input placeholder="Enter Tracking ID"></div>
             </div>
-            <div class="arrive"><i class="fa-solid fa-plane-arrival"></i>
-                <select style="width: 70%;margin-bottom: 10px;">
-                    <option>--Arriving Country--</option>
-                    <option>Bangladesh</option>
-                </select>
-                <select>
-                    <option>--Arriving Airport--</option>
-                    <option>Dhaka,Hazrat Shahjalal International Airport</option>
-                    <option>Chattogram, Shah Amanat International Airport</option>
-                    <option>Barisal, Barishal Airport</option>
-                    <option>Jashore, Jashore Airport</option>
-                    <option>Cox's Bazar, Cox's Bazar Airport</option>
-                </select>
+            <div class="fly hide">
+                <div class="depart">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    <select style="width: 70%;margin-bottom: 10px">
+                        <option>--Departing Country--</option>
+                        <option>Bangladesh</option>
+                    </select>
+                    <select>
+                        <option>--Departing Airport--</option>
+                        <option>Dhaka,Hazrat Shahjalal International Airport</option>
+                        <option>Chattogram, Shah Amanat International Airport</option>
+                        <option>Barisal, Barishal Airport</option>
+                        <option>Jashore, Jashore Airport</option>
+                        <option>Cox's Bazar, Cox's Bazar Airport</option>
+                    </select>
+                </div>
+                <div class="arrive"><i class="fa-solid fa-plane-arrival"></i>
+                    <select style="width: 70%;margin-bottom: 10px;">
+                        <option>--Arriving Country--</option>
+                        <option>Bangladesh</option>
+                    </select>
+                    <select>
+                        <option>--Arriving Airport--</option>
+                        <option>Dhaka,Hazrat Shahjalal International Airport</option>
+                        <option>Chattogram, Shah Amanat International Airport</option>
+                        <option>Barisal, Barishal Airport</option>
+                        <option>Jashore, Jashore Airport</option>
+                        <option>Cox's Bazar, Cox's Bazar Airport</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="check_but" type='submit'><button>Check</button></div>
-    </form>
+            <div class="check_but" type='submit'><button>Check</button></div>
+        </form>
     </div>
     <iframe class="map" width="40%" height="450px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
         src="https://www.openstreetmap.org/export/embed.html?bbox=88.0119,20.5635,92.6739,26.6387&layer=mapnik"

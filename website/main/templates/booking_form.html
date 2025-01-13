@@ -1,10 +1,85 @@
-<form method="POST">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="justtoalign" >
+  {% if error %}
+  <div class="error">{{ error }}</div>
+  {% endif %}
+  <form method="POST">
     {% csrf_token %}
-    <p>Name: {{ name }}</p>
-    <p>Phone Number: {{ phone_number }}</p>
+    <div class="gu">
+      <p><b>Name:</b></p>
+      <p class="fro"> {{ name }}</p>
+    </div>
+    <div class="gu">
+      <p><b>Phone Number:</b></p>
+      <p class="fro"> {{ phone_number }}</p>
+    </div>
     {{ form.as_p }}
-    <p>Pickup: {{ pickup_location }}</p>
-    <p>Dropoff: {{ dropoff_location }}</p>
-    <button type="submit">Submit</button>
+    <div class="gu">
+      <p><b>Pickup:</b></p>
+      <p class="fro"> {{ pickup_location }}</p>
+    </div>
+    <div class="gu">
+      <p><b>Dropoff:</b></p>
+      <p class="fro"> {{ dropoff_location }}</p>
+    </div>
+    <button type="submit" id="oi">Submit</button>
   </form>
+</div>
+<style>
+  #oi{
+    width: 50%;
+    border-top-left-radius: 9%;
+    border-radius: 5%;
+    background-color: #E6E6E6;
+    border-color: rgb(85, 119, 190);
+    padding-left: 5px;
+    justify-content: center;
+    align-items: center;
+    padding:10px 5px;
+  }
   
+  .justtoalign div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .fro{
+    width: 100%;
+    border-top-left-radius: 9%;
+    border-radius: 5%;
+    background-color: #E6E6E6;
+    border-color: rgb(85, 119, 190);
+    padding-left: 5px;
+    justify-content: center;
+    align-items: center;
+    padding:15px 5px;
+  }
+  .justtoalign{
+width: 500px;
+align-self: center;
+display: flex;
+justify-self: center;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top:30px ;
+background-color: rgb(202, 167, 167);
+padding: 20px;
+margin-bottom:20px ;
+  }
+  .gu b {
+    
+  }
+  form b{
+    margin-right: 10px;
+    font-size: 15px;
+  }
+  form p {
+    margin-bottom: 20px;
+  }
+</style>
+  {% endblock %}

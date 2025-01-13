@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="justtoalign" style="display: flex;flex-direction: column;align-items: center;">
+<div class="justtoalign" >
     {% if error %}
     <div class="error">{{ error }}</div>
     {% endif %}
@@ -12,10 +12,11 @@
                 <h1>SumTransit</h1>
                 <h2>Rider Sign-Up<h2>
             </div>
-            <div class="login-box magic" style="margin-top: 20px;">
+            <div class="login-box" style="margin-top: 20px;">
                 <h2>Enter your required information:</h2>
                 <form method="POST" action="{% url 'customer_signup' %}">
                     {% csrf_token %}
+                    <p style="text-align: left;">Username: </p>
                     <input type="text" name="username" placeholder="Enter your username" required>
                     <div class="loca" style="text-align: left;">
                         <div style="width: 45%;display: flex;flex-direction: column;margin-right: 5%;">
@@ -30,24 +31,27 @@
                         </div>
                     </div>
                     <div class="loca">
-                        <input type="email" name="email" placeholder="Enter Email" required>
+                        <p style="text-align: left;">Email: </p>
+                        <input type="email" name="email" placeholder="Enter Email" required >
                     </div>
                     <div class="loca">
-                        <div id="district">
-                            <p>Gender</p>
-                            <select name="gender">
-                                {% for gender, label in genders %}
+                        <div id="district" class="magic" style="margin-right: 10px;">
+                            <p style="text-align: left;">Gender</p>
+                            <select name="gender" required>
+                                {% for gender,label in genders%}
                                 <option value="{{ gender }}">{{ gender }}</option>
                                 {% endfor %}
-                            </select>
+                              </select>
                         </div>
-                        <div id="pnumber">
-                            <p>Enter your number</p>
+                        <div id="pnumber" class="magic" >
+                            <p style="text-align: left;" >Enter your number</p>
                             <input name="phonenumber" placeholder="01XXXXXXXXX">
                         </div>
                     </div>
                     <div id="country">
+                        <p style="text-align: left;">Password: </p>
                         <input type="password" name="password1" placeholder="Enter your password" required>
+                        <p style="text-align: left;">Confirm Password: </p>
                         <input type="password" name="password2" placeholder="Enter your password" required>
                         <button type="submit" class="btn">Continue</button>
                     </div>
@@ -74,4 +78,28 @@
     </body>
 
     </html>
+    <style>
+    .magic{
+        width: 47%;
+        display: flex;
+        flex-direction: column;
+        justify-self: end;
+    }
+    .magic input,.magic select{
+        padding: 10px 0;
+    margin: 5px 0 15px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    } 
+    .login-box input{
+    padding: 10px 0;
+    margin: 5px 0 15px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    padding-left: 10px;
+padding-left: 10px;
+    }
+    </style>
     {% endblock %}
