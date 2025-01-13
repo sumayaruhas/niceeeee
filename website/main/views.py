@@ -15,7 +15,7 @@ from django.contrib.auth.hashers import make_password
 
 def complete_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
-    booking.status = "completed"
+    booking.status = "Completed"
     booking.save()
     
     return redirect('driver_dashboard')
@@ -23,15 +23,17 @@ def complete_booking(request, booking_id):
 
 def pending_car_booking(request):
     car_register = CarRegister.objects.get(user=request.user)
-    user_booking = Booking.objects.filter(status="approved" ,driverid=car_register.id)
-
+    user_booking = Booking.objects.filter(status="Approved" ,driverid=car_register.id)
     return render(request, 'pending_rides.html',{'pendings': user_booking})
 
 def accept_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id)
     driver = CarRegister.objects.get(user=request.user)
     booking.driverid = driver
-    booking.status = "approved"
+    booking.driver_name= f"{driver.firstname} {driver.lastname}"
+    booking.driver_phone_number = driver.phonenumber
+    booking.driver_prof = driver.profilepic
+    booking.status = "Approved"
     booking.save()
     
     return redirect('driver_dashboard')
@@ -39,7 +41,7 @@ def accept_booking(request, booking_id):
 
 def confirm_car_booking(request):
 
-    user_booking = Booking.objects.filter(status='pending')
+    user_booking = Booking.objects.filter(status='Pending')
 
     return render(request, 'confirm_car_booking.html',{'pendings': user_booking})
 
@@ -318,6 +320,7 @@ def booking_form(request):
                 dropoff_location=dropoff_location,
                 dropoff_date=dropoff_date,
                 dropoff_time=dropoff_time,
+                customer_prof = RiderRegister.objects.get(user=request.user).profilepic,
             )
 
             messages.success(request, 'Booking submitted successfully!')
@@ -343,11 +346,9 @@ def booking_form(request):
     })
     
 def testdashboard(request):
-    # Fetch the user's bookings
-    user_bookings = Booking.objects.all()  # Filter based on user if you have user accounts
-
-    return render(request, 'testdashboard.html', {'bookings': user_bookings})
-
+    rider = RiderRegister.objects.get(user=request.user)
+    user_bookings = Booking.objects.filter(customerid=rider.id)
+    return render(request, 'testdashboard.html', {'bookings': user_bookings })
 
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -380,3 +381,8 @@ def update_driver_profile(request):
 
     return render(request, 'update_driver_profile.html', {'form': form})
 
+def view_driver(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id)
+    driver = CarRegister.objects.get(email=booking.driverid)
+    
+    return render(request, 'view_driver.html', {'booking': booking, 'driver': driver})

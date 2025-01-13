@@ -85,6 +85,28 @@
         <div class="sub_nav"><i class="fa-brands fa-shopify" style="color: #ffffff;"></i>
           <p>Commission</p>
         </div>
+      {% elif user.is_authenticated %}
+      <a href="{% url 'home' %}" class="thakna">
+        <div class="sub_nav">
+          <i class="fa-solid fa-house"></i>
+          <p>Home</p>
+        </div>
+      </a>
+      <a href="{% url 'services' %}" class="thakna">
+        <div class="Navbar-2-vitor sub_nav " style="display:flex; align-items:center;">
+          <i class="fa-solid fa-taxi" style="color: #f7f7f7;"></i>
+          <p>Services</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        </div>
+      </a>
+      <a href="{% url 'testdashboard' %}" class="thakna">
+        <div class="sub_nav"><i class="fa-regular fa-address-card" style="color: #ffffff;"></i>
+          <p>Bookings</p><i class="fa-solid fa-caret-down" style="margin-left: 5px;"></i>
+        </div>
+      </a>
+      <a href="{% url 'deals' %}" class="thakna">
+        <div class="sub_nav"><i class="fa-brands fa-shopify" style="color: #ffffff;"></i>
+          <p>Deals</p>
+        </div>
       {% else %}
       <a href="{% url 'home' %}" class="thakna">
         <div class="sub_nav">

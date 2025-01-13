@@ -16,6 +16,8 @@
                 <p style="font-size: 15px;">Fly</p>
             </div>
         </div>
+        <form method="POST" action="{% url 'booking_page' %}">
+            {% csrf_token %}
         <div class="loc">
             <div class="from"><input placeholder="Pickup Location">
                 <i class="fa-solid fa-location-dot" style="font-size: 25px;"></i>
@@ -56,7 +58,8 @@
                 </select>
             </div>
         </div>
-        <div class="check_but"><button>Check</button></div>
+        <div class="check_but" type='submit'><button>Check</button></div>
+    </form>
     </div>
     <iframe class="map" width="40%" height="450px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
         src="https://www.openstreetmap.org/export/embed.html?bbox=88.0119,20.5635,92.6739,26.6387&layer=mapnik"

@@ -14,7 +14,7 @@ def profile_pic(request):
                 customer = RiderRegister.objects.get(user=request.user)
                 profile_pic = customer.profilepic.url if customer.profilepic else 'profilepic/profile.jpg'
         except (CarRegister.DoesNotExist, RiderRegister.DoesNotExist):
-            profile_pic = 'profilepic/profile.jpg'  # Default profile picture
+            profile_pic = 'profilepic/profile.jpg' # Default profile picture
 
         return {'profile_pic': profile_pic}
 

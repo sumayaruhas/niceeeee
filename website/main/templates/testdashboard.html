@@ -1,71 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-    table, th, td {
-      border: 1px solid black;
-    }
+<div style="align-items: center;display: flex;flex-direction: column;">
+  <h1 class="dealsheader">Booking Section</h1>
+  <ul>
+    {% for booking in bookings %}
+    <li>
+      <div class="dealsbox">
+        <p class="dealsdes"><b>Pickup Location: </b>{{ booking.pickup_location }}</p>
+        <p class="dealsdes"><b>Dropoff Location: </b>{{ booking.dropoff_location }}</p>
+        <p class="dealsdes"><b>Pickup: </b>{{ booking.pickup_date }} {{ booking.pickup_time }}</p>
+        <p class="dealsdes"><b>Dropoff: </b>{{ booking.dropoff_date }} {{ booking.dropoff_time }}</p>
+        <p class="dealsdes"><b>Status: </b>{{booking.status}}</p>
+        {% if not booking.status == "Pending" %}
 
-    th, td {
-      padding: 10px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    .approved {
-      color: green;
-    }
-
-    .pending {
-      color: orange;
-    }
-  </style>
-</head>
-<body>
-  <h1>Dashboard</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Pickup Location</th>
-        <th>Dropoff Location</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for booking in bookings %}
-        <tr>
-          <td>{{ booking.name }}</td>
-          <td>{{ booking.pickup_location }}</td>
-          <td>{{ booking.dropoff_location }}</td>
-          <td class="{% if booking.status == 'approved' %}approved{% else %}pending{% endif %}">
-            {% if booking.status == 'approved' %}
-                Approved
+        <h3 class="dealstitle">Accepted By:</h3>
+        <div style="display: flex;justify-content: center;align-items: center;">
+          {% if booking.driver_prof %}
+          <div style="margin-right: 20px;">
+            <img src="{{ booking.driver_prof.url }}" alt="Driver Profile" style="width: 150px;height: 150px;object-fit: cover;border-radius: 50px; 
+    border: #f7f7f7 1px solid; ">
             {% else %}
-                Pending Approval
+            <img src="{% static 'images/profilepic/profile.jpg' %}" alt="Default Profile"
+              style="width: 200px;height: 200px;">
             {% endif %}
-        </td>
-        
-        
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+          </div>
 
-  {% if not bookings %}
-    <p>No bookings yet!</p>
-  {% endif %}
-</body>
-</html>
+          <div style="display: flex;flex-direction: column;width: 80%;">
+            <p class="dealsdes"><b>Name: </b>{{ booking.driver_name }}</p>
+            <p class="dealsdes"><b>Phone: </b>{{ booking.driver_phone_number }}</p>
+          </div>
+        </div>{% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+{% if not bookings %}
+<p>No bookings yet!</p>
+{% endif %}
+{% endblock %}

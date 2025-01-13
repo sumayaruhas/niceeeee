@@ -1,34 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<form id="helpRequestFormhelp" action="{% url 'help_request' %}" method="post">
-    {% csrf_token %}
-    <div class="formSectionhelp" id="usernameSection">
-        <label for="usernameField" class="formLabelhelp">Your Name:</label>
-        <input type="text" id="usernameFieldhelp" name="name" class="inputFieldhelp" placeholder="Enter your name" required>
-    </div>
+<div style="align-items: center;display: flex;flex-direction: column;justify-content: center;">
 
-    <div class="formSectionhelp" id="emailSection">
-        <label for="emailField" class="formLabelhelp">Your Email:</label>
-        <input type="email" id="emailFieldhelp" name="email" class="inputFieldhelp" placeholder="Enter your email" required>
-    </div>
+    <h1 class="dealsheader">Ask Help!!</h1>
+    <form id="helpRequestFormhelp" action="{% url 'help_request' %}" method="post">
+        <div style="align-items: center;display: flex;flex-direction:column; width:500px;justify-content: center;margin:20px;"></div>
+            {% csrf_token %}
+            <div class="formSectionhelp" id="usernameSection">
+                <label for="usernameField" class="formLabelhelp">Your Name:</label>
+                <input style="padding-left: 10px;padding-right: 10px;" type="text" id="usernameFieldhelp" name="name"
+                    class="inputFieldhelp" placeholder="Enter your name" style="width: 100%;" required>
+            </div>
 
-    <div class="formSectionhelp" id="helpTypeSectionhelp">
-        <label for="helpTypeField" class="formLabelhelp">Type of Help Needed:</label>
-        <select id="helpTypeFieldhelp" name="help_type" class="inputFieldhelp" required>
-            <option value="" disabled selected>Select an option</option>
-            <option value="financial">Financial Assistance</option>
-            <option value="emotional">Emotional Support</option>
-            <option value="technical">Technical Assistance</option>
-            <option value="other">Other</option>
-        </select>
-    </div>
+            <div class="formSectionhelp" id="emailSection">
+                <label for="emailField" class="formLabelhelp">Your Email:</label>
+                <input type="email" id="emailFieldhelp" name="email" class="inputFieldhelp"
+                    placeholder="Enter your email" required>
+            </div>
 
-    <div class="formSectionhelp" id="messageSectionhelp">
-        <label for="messageField" class="formLabelhelp">Your Message:</label>
-        <textarea id="messageFieldhelp" name="message" class="textareaFieldhelp" placeholder="Describe your situation..." required></textarea>
-    </div>
+            <div class="formSectionhelp" id="helpTypeSectionhelp">
+                <label for="helpTypeField" class="formLabelhelp">Type of Help Needed:</label>
+                <select id="helpTypeFieldhelp" name="help_type" class="inputFieldhelp" style="width: 104%;" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="financial">Financial Assistance</option>
+                    <option value="emotional">Emotional Support</option>
+                    <option value="technical">Technical Assistance</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
 
-    <a href="{% url 'help_success' %}" class="thakna"><button type="submit" class="submitButtonhelp" id="submitHelpButton">Submit Request</button></a>
-</form>
+            <div class="formSectionhelp" id="messageSectionhelp">
+                <label for="messageField" class="formLabelhelp">Your Message:</label>
+                <textarea id="messageFieldhelp" name="message" class="textareaFieldhelp"
+                    placeholder="Describe your situation..." required></textarea>
+            </div>
+
+            <a href="{% url 'help_success' %}" class="thakna"><button type="submit" class="submitButtonhelp"
+                    id="submitHelpButton" style="width: 105%;">Submit Request</button></a>
+    </form>
+</div>
 {% endblock %}

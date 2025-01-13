@@ -7,19 +7,27 @@
     {% endif %}
 
     <div class="justtoalign">
-        <div class="containersu" style="margin-top:20px;width: 600px;">
+        <div class="containersu" style="margin-top:20px;width: 500px;">
             <div class="logo">
                 <h1>SumTransit</h1>
                 <h2>Rider Sign-Up<h2>
             </div>
-            <div class="login-box real-info" style="margin-top: 20px;">
+            <div class="login-box magic" style="margin-top: 20px;">
                 <h2>Enter your required information:</h2>
                 <form method="POST" action="{% url 'customer_signup' %}">
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="Enter your username" required>
-                    <div class="loca">
-                        <input type="text" name="firstname" placeholder="Enter First Name" required>
-                        <input type="text" name="lastname" placeholder="Enter Last Name" required>
+                    <div class="loca" style="text-align: left;">
+                        <div style="width: 45%;display: flex;flex-direction: column;margin-right: 5%;">
+                            <p>First Name: </p>
+                            <input type="text" name="firstname" placeholder="Enter First Name" style="width: 100%;"
+                                required>
+                        </div>
+
+                        <div style="width: 45%;display: flex;flex-direction: column;justify-self: end;">
+                            <p>Last Name: </p><input type="text" name="lastname" placeholder="Enter Last Name"
+                                style="width: 100%;" required>
+                        </div>
                     </div>
                     <div class="loca">
                         <input type="email" name="email" placeholder="Enter Email" required>
@@ -27,7 +35,7 @@
                     <div class="loca">
                         <div id="district">
                             <p>Gender</p>
-                            <select name="gender" >
+                            <select name="gender">
                                 {% for gender, label in genders %}
                                 <option value="{{ gender }}">{{ gender }}</option>
                                 {% endfor %}

@@ -235,24 +235,24 @@ class Deal(models.Model):
 
 class DealStatus(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
-        ('completed','Completed'),
+        ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
+        ('Completed','Completed'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     deal = models.ForeignKey(Deal, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
                                            
     def __str__(self):
         return f"{self.user.username} - {self.deal.title} ({self.status})"
     
 class Booking(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('approved', 'Approved'),
-        ('rejected', 'Rejected'),
+        ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
     ]
     customerid = models.ForeignKey('RiderRegister', on_delete=models.CASCADE, related_name='customer_bookings',null=True, blank=True)
     driverid = models.ForeignKey('CarRegister', on_delete=models.CASCADE, null=True, blank=True, related_name='driver_bookings')
@@ -264,7 +264,10 @@ class Booking(models.Model):
     dropoff_location = models.CharField(max_length=255)
     dropoff_date = models.DateField(default=datetime.date(1999, 10, 10))
     dropoff_time = models.TimeField(default=datetime.time(0, 0))
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-
+    driver_name=models.CharField(max_length=100,null=True, blank=True)
+    driver_phone_number = models.CharField(max_length=15,null=True, blank=True)
+    driver_prof=models.ImageField( upload_to='profilepic/', null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
+    customer_prof=models.ImageField( upload_to='profilepic/', null=True, blank=True)
     def __str__(self):
         return f"Booking by {self.name}"
