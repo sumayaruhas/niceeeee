@@ -38,8 +38,10 @@
           <p>Logout</p>
         </div>
       </a>
-      {% if profile_pic %}
-      <img class="profile_pic_das" src="{{profile_pic}}" style="object-fit: contain;">
+      {% if profile_pic and user.user_type == 'Driver'%}
+      <a href="{% url 'driver_dashboard' %}"><img class="profile_pic_das" src="{{profile_pic}}" style="object-fit: contain;"></a>
+      {% elif profile_pic %}
+      <a href="{% url 'customer_dashboard' %}"><img class="profile_pic_das" src="{{profile_pic}}" style="object-fit: contain;"></a>
       {% endif %}
 
 
@@ -184,5 +186,4 @@
   </footer>
   <script src="{% static 'website/js/app.js' %}"></script>
 </body>
-
 </html>
