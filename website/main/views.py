@@ -389,6 +389,6 @@ def view_driver(request, booking_id):
 
 def completed_car_booking(request):
     car_register = CarRegister.objects.get(user=request.user)
-    completed_bookings = Booking.objects.filter(status="completed", driverid=car_register.id)
+    completed_bookings = Booking.objects.filter(driverid=car_register.id).exclude(status="pending")
 
     return render(request, 'completed_rides.html', {'completed': completed_bookings})
